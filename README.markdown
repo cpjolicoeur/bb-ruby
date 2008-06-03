@@ -37,3 +37,4 @@ THE SOFTWARE.
 #### Acknowledgements
 
 * [ruby-bbcode project](http://code.google.com/p/ruby-bbcode/)
+* [Nazgum's Blog](http://www.nazgum.com/2008/01/08/bbcode-with-ruby-on-rails-part-1/)

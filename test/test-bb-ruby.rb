@@ -1,5 +1,5 @@
 #! /usr/bin/env ruby
-load 'bbcode.rb'
+load 'lib/bb-ruby.rb'
 
 text = <<eot
 [b]Here is some bold text[/b]
@@ -16,17 +16,25 @@ List of stuff:
         [li]Bears[/li]
 [/ul]
 
+[size=32]12px Text[/size]
+[color=red]Red Text[/color]
+[color=#ff0023]Hex Color Text[/color]
+
 Link: [url=http://google.com]Google[/url]
 Link (implied): [url]http://google.com[/url]
 Link (automatic): http://google.com
 Image: [img]http://zoople/hochzeit.png[/img]
 Image: [img=http://zoople/hochzeit.png]
+Image (resized): [img size=96x96]http://zoople/hochzeit.png[/img]
 Image (invalid): [img]http://google.com/google.img[/img]
 
 [quote=Bush]Go kill them terrists[/quote]
 [quote]Something wise.[/quote]
+
+[youtube]http://youtube.com/watch?v=E4Fbk52Mk1w[/youtube]
+[gvideo]http://video.google.com/videoplay?docid=-2200109535941088987[/gvideo]
 eot
 
-text.bbcode_to_html!(:enable, :unorderedlist, :quote)
+text.bbcode_to_html!#(:enable, :unorderedlist, :quote)
 
 puts text
