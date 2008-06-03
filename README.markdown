@@ -2,11 +2,9 @@
 
 bb-ruby is a [BBCode](http://www.bbcode.org) implementation for Ruby
 
----
-
 ## Usage
 
-`require 'bluecloth'`
+`require 'bb-ruby'`
 
 Standard usage:
 `output = BBRuby.to_html(bbcode_markup)`
@@ -17,15 +15,11 @@ Only allow certain tags:
 Disable certain tags:
 `output = BBRuby.to_html(bbcode_markup, :disable, { :image, :bold, :quote })`
 
----
-
-### Developers
+## Developers
 
 * [Craig P Jolicoeur](http://github.com/cpjolicoeur)
 
----
-
-### License
+## License
 
 Copyright (c) 2008 Craig P Jolicoeur 
 
@@ -47,9 +41,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
----
-
-#### Acknowledgements
+## Acknowledgements
 
 * [ruby-bbcode project](http://code.google.com/p/ruby-bbcode/)
 * [Nazgum's Blog](http://www.nazgum.com/2008/01/08/bbcode-with-ruby-on-rails-part-1/)
