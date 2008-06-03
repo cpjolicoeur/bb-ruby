@@ -1,6 +1,6 @@
 # bb-ruby
 
-* bb-ruby is a [BBCode](http://www.bbcode.org) implementation for Ruby
+bb-ruby is a [BBCode](http://www.bbcode.org) implementation for Ruby
 
 ### Developers
 
