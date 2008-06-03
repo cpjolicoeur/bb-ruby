@@ -4,6 +4,21 @@ bb-ruby is a [BBCode](http://www.bbcode.org) implementation for Ruby
 
 ---
 
+## Usage
+
+`require 'bluecloth'`
+
+Standard usage:
+`output = BBRuby.to_html(bbcode_markup)`
+
+Only allow certain tags:
+`output = BBRuby.to_html(bbcode_markup, :enable, { :image, :bold, :quote })`
+
+Disable certain tags:
+`output = BBRuby.to_html(bbcode_markup, :disable, { :image, :bold, :quote })`
+
+---
+
 ### Developers
 
 * [Craig P Jolicoeur](http://github.com/cpjolicoeur)
