@@ -25,7 +25,9 @@ Link (implied): [url]http://google.com[/url]
 Link (automatic): http://google.com
 Image: [img]http://zoople/hochzeit.png[/img]
 Image: [img=http://zoople/hochzeit.png]
-Image (resized): [img size=96x96]http://zoople/hochzeit.png[/img]
+Image (resized 1): [img size=96x96]http://zoople/hochzeit.png[/img]
+Image (resized 2): [img size="96x96"]http://zoople/hochzeit.png[/img]
+Image (resized 3): [img size='96x96']http://zoople/hochzeit.png[/img]
 Image (invalid): [img]http://google.com/google.img[/img]
 
 [quote=Bush]Go kill them terrists[/quote]
