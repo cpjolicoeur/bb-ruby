@@ -7,18 +7,23 @@ bb-ruby is a [BBCode](http://www.bbcode.org) implementation for Ruby
 `require 'bb-ruby'`
 
 Standard usage:
+
 `output = BBRuby.to_html(bbcode_markup)`
 
 Only allow certain tags:
+
 `output = BBRuby.to_html(bbcode_markup, :enable, { :image, :bold, :quote })`
 
 Disable certain tags:
+
 `output = BBRuby.to_html(bbcode_markup, :disable, { :image, :bold, :quote })`
 
 BBRuby has also been included directly into the String class for use on any string object:
 
 `text = "[b]Here is some bold text[/b] followed by some [u]underlined text[/u]"`
+
 `output = text.bbcode_to_html`
+
 `text.bbcode_to_html!`
 
 
