@@ -37,6 +37,8 @@ Image (invalid): [img]http://google.com/google.img[/img]
 [gvideo]http://video.google.com/videoplay?docid=-2200109535941088987[/gvideo]
 eot
 
-text.bbcode_to_html!#(:enable, :unorderedlist, :quote)
+output = BBRuby.to_html(text)
+puts output
 
-puts text
+# text.bbcode_to_html! #(:enable, :unorderedlist, :quote)
+# puts text

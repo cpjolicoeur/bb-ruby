@@ -15,6 +15,13 @@ Only allow certain tags:
 Disable certain tags:
 `output = BBRuby.to_html(bbcode_markup, :disable, { :image, :bold, :quote })`
 
+BBRuby has also been included directly into the String class for use on any string object:
+
+`text = "[b]Here is some bold text[/b] followed by some [u]underlined text[/u]"`
+`output = text.bbcode_to_html`
+`text.bbcode_to_html!`
+
+
 ## Developers
 
 * [Craig P Jolicoeur](http://github.com/cpjolicoeur)

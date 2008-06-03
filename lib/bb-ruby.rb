@@ -1,4 +1,3 @@
-#! /usr/bin/env ruby
 module BBRuby
   @@imageformats = 'png|bmp|jpg|gif'
   @@tags = {
@@ -165,7 +164,7 @@ module BBRuby
       '[gvideo]http://video.google.com/videoplay?docid=-2200109535941088987[/gvideo]',
       :video]
   }
-  def self.to_html(text, method, tags)
+  def self.to_html(text, method = :disable, *tags)
     case method
       when :enable
         @@tags.each_value { |t|
