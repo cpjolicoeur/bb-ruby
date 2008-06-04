@@ -2,19 +2,6 @@ module BBRuby
   @@imageformats = 'png|bmp|jpg|gif'
   @@tags = {
     # tag name => [regex, replace, description, example, enable/disable symbol]
-    'Strip HTML' => [
-      '<',
-      '&lt;',
-      '',
-      nil, nil
-    ],
-    'Strip HTML (2)' => [
-      '>',
-      '&gt;',
-      '',
-      nil, nil
-    ],
-
     'Bold' => [
       /\[b\](.*?)\[\/b\]/,
       '<strong>\1</strong>',
@@ -175,20 +162,7 @@ module BBRuby
       '<embed style="width:400px; height:326px;" id="VideoPlayback" type="application/x-shockwave-flash" src="http://video.google.com/googleplayer.swf?docId=\2" flashvars=""> </embed>',
       'Display a video from Google Video', 
       '[gvideo]http://video.google.com/videoplay?docid=-2200109535941088987[/gvideo]',
-      :video],
-      
-    'Parse Newlines' => [
-      /\r\n?/,
-      "\n",
-      'Convert newlines',
-      nil, nil
-    ],
-    'Parse Newlines (2nd step)' => [
-      /\n/,
-      "<br />",
-      'Convert newlines',
-      nil, nil
-    ]
+      :video]
   }
   def self.to_html(text, method = :disable, *tags)
     # escape < and > to remove any html
