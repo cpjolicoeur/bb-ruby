@@ -73,6 +73,7 @@ module BBRuby
     'List Item (alternative)' => [
       /\[\*\](.*?)$/,
       '<li>\1</li>',
+      'List item (alternative)',
       nil, nil,
       :listitem],
   
@@ -85,11 +86,13 @@ module BBRuby
     'Definition Term' => [
       /\[dt\](.*?)\[\/dt\]/,
       '<dt>\1</dt>',
+      'List of definition terms',
       nil, nil,
       :defineterm],
     'Definition Definition' => [
       /\[dd\](.*?)\[\/dd\]/,
       '<dd>\1</dd>',
+      'Definition definitions',
       nil, nil,
       :definition],
   
@@ -99,6 +102,7 @@ module BBRuby
 <legend>\1</legend>
 <blockquote>\2</blockquote>
 </fieldset>',
+      'Quote with citation',
       nil, nil,
       :quote],
     'Quote (Sourceless)' => [
@@ -106,6 +110,7 @@ module BBRuby
       '<fieldset>
 <blockquote>\1</blockquote>
 </fieldset>',
+      'Quote (sourceclass)',
       nil, nil,
       :quote],
   
@@ -119,12 +124,18 @@ module BBRuby
     'Link (Implied)' => [
       /\[url\](.*?)\[\/url\]/,
       '<a href="\1">\1</a>',
+      'Hyperlink (implied)',
       nil, nil,
       :link],
-    # I'll fix this later or something
-#               'Link (Automatic)' => [
-#                       /http:\/\/(.*?)[^<\/a>]/,
-#                       '<a href="\1">\1</a>'],
+    # 
+    # TODO: fix automatic links
+    #
+    # 'Link (Automatic)' => [
+    #   /http:\/\/(.*?)[^<\/a>]/,
+    #   '<a href="\1">\1</a>',
+    #   'Hyperlink (automatic)',
+    #   nil, nil,
+    #   :link],
   
     'Image' => [
       /\[img\]([^\[\]].*?)\.(#{@@imageformats})\[\/img\]/i,
