@@ -20,6 +20,10 @@ List of stuff:
 [color=red]Red Text[/color]
 [color=#ff0023]Hex Color Text[/color]
 
+
+
+
+
 Link: [url=http://google.com]Google[/url]
 Link (implied): [url]http://google.com[/url]
 Link (automatic): http://google.com

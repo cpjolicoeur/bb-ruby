@@ -165,6 +165,11 @@ module BBRuby
       :video]
   }
   def self.to_html(text, method = :disable, *tags)
+    # escape < and > to remove any html
+    text.gsub!( '<', '&lt;' )
+    text.gsub!( '>', '&gt;' )
+    
+    # parse bbcode tags
     case method
       when :enable
         @@tags.each_value { |t|
@@ -176,6 +181,12 @@ module BBRuby
           text.gsub!(t[0], t[1]) unless tags.include?(t[4])
         }
     end
+    
+    # parse spacing
+    text.gsub!( /\r\n?/, "\n" )
+    text.gsub!( /\n/, "<br />" )
+    
+    # return markup
     text
   end
   def self.tags
