@@ -189,6 +189,7 @@ module BBRuby
     # return markup
     text
   end
+  
   def self.tags
     @@tags.each { |tn, ti|
       # yields the tag name, a description of it and example
