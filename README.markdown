@@ -57,3 +57,8 @@ THE SOFTWARE.
 
 * [ruby-bbcode project](http://code.google.com/p/ruby-bbcode/)
 * [Nazgum's Blog](http://www.nazgum.com/2008/01/08/bbcode-with-ruby-on-rails-part-1/)
+
+## TODO
+
+* add support for [email] tag
+* add support for [code] tag
