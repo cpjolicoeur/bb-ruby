@@ -176,6 +176,7 @@ module BBRuby
       :video]
   }
   def self.to_html(text, method = :disable, *tags)
+    text = text.clone
     # escape < and > to remove any html
     text.gsub!( '<', '&lt;' )
     text.gsub!( '>', '&gt;' )
