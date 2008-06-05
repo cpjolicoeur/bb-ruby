@@ -23,7 +23,6 @@ Disable certain tags:
 `output = text.bbcode_to_html(:disable, :image, :bold, :quote)`
 
 Alternative Direct usage:
-**be aware that this usage will directly manipulate the original string!**
 
 `output = BBRuby.to_html(bbcode_markup)`
 
