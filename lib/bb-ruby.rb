@@ -22,7 +22,7 @@ module BBRuby
       :underline],
     'Strikeout' => [
       /\[s\](.*?)\[\/s\]/,
-      '<s>\1</s>',
+      '<del>\1</del>',
       'Strikeout',
       '[s]nevermind[/s]',
       :strikeout],
