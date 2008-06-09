@@ -157,7 +157,7 @@ module BBRuby
       :image],
       
     'YouTube' => [
-      /\[youtube\](.*?)\?v=([\w\d\-]+)\[\/youtube\]/i,
+      /\[youtube\](.*?)\?v=([\w\d\-]+).*\[\/youtube\]/i,
       '<object width="400" height="330"><param name="movie" value="http://www.youtube.com/v/\2"></param><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/\2" type="application/x-shockwave-flash" wmode="transparent" width="400" height="330"></embed></object>',
       'Display a video from YouTube.com', 
       '[youtube]http://youtube.com/watch?v=E4Fbk52Mk1w[/youtube]',
