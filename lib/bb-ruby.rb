@@ -169,7 +169,7 @@ module BBRuby
       '[youtube]http://youtube.com/watch/v/E4Fbk52Mk1w[/youtube]',
       :video],
     'Google Video' => [
-      /\[gvideo\](.*?)\?docid=([-]{0,1}\d+)\[\/gvideo\]/i,
+      /\[gvideo\](.*?)\?docid=([-]{0,1}\d+).*\[\/gvideo\]/i,
       '<embed style="width:400px; height:326px;" id="VideoPlayback" type="application/x-shockwave-flash" src="http://video.google.com/googleplayer.swf?docId=\2" flashvars=""> </embed>',
       'Display a video from Google Video', 
       '[gvideo]http://video.google.com/videoplay?docid=-2200109535941088987[/gvideo]',
