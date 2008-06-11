@@ -98,18 +98,13 @@ module BBRuby
   
     'Quote' => [
       /\[quote=(.*?)\](.*?)\[\/quote\]/m,
-      '<fieldset>
-<legend>\1</legend>
-<blockquote>\2</blockquote>
-</fieldset>',
+      '<fieldset><legend>\1</legend><blockquote>\2</blockquote></fieldset>',
       'Quote with citation',
       nil, nil,
       :quote],
     'Quote (Sourceless)' => [
       /\[quote\](.*?)\[\/quote\]/m,
-      '<fieldset>
-<blockquote>\1</blockquote>
-</fieldset>',
+      '<fieldset><blockquote>\1</blockquote></fieldset>',
       'Quote (sourceclass)',
       nil, nil,
       :quote],
