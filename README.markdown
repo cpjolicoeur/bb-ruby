@@ -2,6 +2,16 @@
 
 bb-ruby is a [BBCode](http://www.bbcode.org) implementation for Ruby
 
+## Installation
+
+To install as a plugin:
+
+`./script/plugin install git://github.com/cpjolicoeur/bb-ruby.git`
+
+To install as a gem:
+
+`sudo gem install bb-ruby --source=http://gems.github.com/`
+
 ## Usage
 
 `require 'bb-ruby'`
