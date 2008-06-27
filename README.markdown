@@ -1,6 +1,8 @@
 # bb-ruby
 
-bb-ruby is a [BBCode](http://www.bbcode.org) implementation for Ruby
+bb-ruby is a [BBCode](http://www.bbcode.org) implementation for Ruby.
+
+It will convert strings with BBCode markup to their HTML equivalent.
 
 ## Installation
 
