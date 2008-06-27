@@ -10,11 +10,11 @@ To install as a plugin:
 
 To install as a gem:
 
-`sudo gem install bb-ruby --source=http://gems.github.com/`
+`sudo gem install cpjolicoeur-bb-ruby --source=http://gems.github.com/`
 
 ## Usage
 
-`require 'bb-ruby'`
+`require 'bb-ruby'` (only needed if installed as a gem)
 
 BBRuby has been included directly into the String class for use on any string object:
 
