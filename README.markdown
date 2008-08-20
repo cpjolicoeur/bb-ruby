@@ -4,6 +4,11 @@ bb-ruby is a [BBCode](http://www.bbcode.org) implementation for Ruby.
 
 It will convert strings with BBCode markup to their HTML equivalent.
 
+This version is a fork from original [bb-ruby](git://github.com/cpjolicoeur/bb-ruby) for adding support
+to the BBCode version of PphpBB forums, that adds some tag ids inside of each tag. For example:
+
+`[b:2131ds]some text[/b:2131ds]`
+
 ## Installation
 
 To install as a plugin:
@@ -41,10 +46,11 @@ Alternative Direct usage:
 ## Developers
 
 * [Craig P Jolicoeur](http://github.com/cpjolicoeur)
+* [Fernando Blat](http://github.com/ferblape)
 
 ## License
 
-Copyright (c) 2008 Craig P Jolicoeur 
+Copyright (c) 2008 Craig P Jolicoeur, Fernando Blat
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -71,5 +77,7 @@ THE SOFTWARE.
 
 ## TODO
 
+* fix the problem with images
 * add support for [email] tag
-* add support for [code] tag
+* fix problem with alternative list item (the test is broken because of this bug)
+* complete the tests
