@@ -3,42 +3,47 @@ module BBRuby
   @@tags = {
     # tag name => [regex, replace, description, example, enable/disable symbol]
     'Bold' => [
-      /\[b\](.*?)\[\/b\]/,
-      '<strong>\1</strong>',
+      /\[b(:.+)?\](.*?)\[\/b\1?\]/,
+      '<strong>\2</strong>',
       'Embolden text',
       'Look [b]here[/b]',
       :bold],
     'Italics' => [
-      /\[i\](.*?)\[\/i\]/,
-      '<em>\1</em>',
+      /\[i(:.+)?\](.*?)\[\/i\1?\]/,
+      '<em>\2</em>',
       'Italicize or emphasize text',
       'Even my [i]cat[/i] was chasing the mailman!',
       :italics],
     'Underline' => [
-      /\[u\](.*?)\[\/u\]/,
-      '<u>\1</u>',
+      /\[u(:.+)?\](.*?)\[\/u\1?\]/,
+      '<u>\2</u>',
       'Underline',
       'Use it for [u]important[/u] things or something',
       :underline],
     'Strikeout' => [
-      /\[s\](.*?)\[\/s\]/,
-      '<del>\1</del>',
+      /\[s(:.+)?\](.*?)\[\/s\1?\]/,
+      '<del>\2</del>',
       'Strikeout',
       '[s]nevermind[/s]',
       :strikeout],
     'Delete' => [
-      /\[del\](.*?)\[\/del\]/,
-      '<del>\1</del>',
+      /\[del(:.+)?\](.*?)\[\/del\1?\]/,
+      '<del>\2</del>',
       'Deleted text',
       '[del]deleted text[/del]',
       :delete],
     'Insert' => [
-      /\[ins\](.*?)\[\/ins\]/,
-      '<ins>\1</ins>',
+      /\[ins(:.+)?\](.*?)\[\/ins\1?\]/,
+      '<ins>\2</ins>',
       'Inserted Text',
       '[ins]inserted text[/del]',
       :insert],
-
+    'Code' => [
+      /\[code(:.+)?\](.*?)\[\/code\1?\]/,
+      '<code>\2</code>',
+      'Code Text',
+      '[code]some code[/code]',
+      :code],
     'Size' => [
       /\[size=['"]?(.*?)['"]?\](.*?)\[\/size\]/im,
       '<span style="font-size: \1px;">\2</span>',
@@ -97,14 +102,14 @@ module BBRuby
       :definition],
   
     'Quote' => [
-      /\[quote=(.*?)\](.*?)\[\/quote\]/m,
-      '<fieldset><legend>\1</legend><blockquote>\2</blockquote></fieldset>',
+      /\[quote(.*)?=(.*?)\](.*?)\[\/quote\1\]/m,
+      '<fieldset><legend>\2</legend><blockquote>\3</blockquote></fieldset>',
       'Quote with citation',
       nil, nil,
       :quote],
     'Quote (Sourceless)' => [
-      /\[quote\](.*?)\[\/quote\]/m,
-      '<fieldset><blockquote>\1</blockquote></fieldset>',
+      /\[quote(.*)?\](.*?)\[\/quote\1\]/m,
+      '<fieldset><blockquote>\2</blockquote></fieldset>',
       'Quote (sourceclass)',
       nil, nil,
       :quote],
@@ -133,8 +138,8 @@ module BBRuby
     #   :link],
   
     'Image' => [
-      /\[img\]([^\[\]].*?)\.(#{@@imageformats})\[\/img\]/i,
-      '<img src="\1.\2" alt="" />',
+      /\[img(.+)?\]([^\[\]].*?)\.(#{@@imageformats})\[\/img\1\]/i,
+      '<img src="\2.\3" alt="" />',
       'Display an image',
       'Check out this crazy cat: [img]http://catsweekly.com/crazycat.jpg[/img]',
       :image],
@@ -205,11 +210,12 @@ module BBRuby
   end
 end
 
+
 class String
   def bbcode_to_html(method = :disable, *tags)
-          BBRuby.to_html(self, method, tags)
+    BBRuby.to_html(self, method, tags)
   end
   def bbcode_to_html!(method = :disable, *tags)
-          self.replace(BBRuby.to_html(self, method, tags))
+    self.replace(BBRuby.to_html(self, method, tags))
   end
 end
