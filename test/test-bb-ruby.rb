@@ -86,10 +86,47 @@ class TestBBRuby < Test::Unit::TestCase
     assert_equal '<span style="color: red;">Red Text</span>', '[color=red]Red Text[/color]'.bbcode_to_html
     assert_equal '<span style="color: #ff0023;">Hex Color Text</span>', '[color=#ff0023]Hex Color Text[/color]'.bbcode_to_html
   end
-    
-  def test_multi_tags
-    multi_tagging = "[quote:7a9ca2c5c3=\"black\"]si el niño hubiera sido de \"penalty\" le hubieran llamado [b:7a9ca2c5c3]system Error[/b:7a9ca2c5c3]!!! :)[/quote:7a9ca2c5c3]"
-    assert_equal multi_tagging.bbcode_to_html, '<fieldset><legend>"black"</legend><blockquote>si el niño hubiera sido de "penalty" le hubieran llamado <strong>system Error</strong>!!! :)</blockquote></fieldset>'
+  
+  def test_ordered_list
+    assert_equal '<ol><li>item 1</li><li>item 2</li></ol>', '[ol][li]item 1[/li][li]item 2[/li][/ol]'.bbcode_to_html
+    assert_equal '<ol><li>item 1</li><li>item 2</li></ol>', '[ol][*]item 1[li]item 2[/li][/ol]'.bbcode_to_html
   end
 
+  def test_unordered_list
+    assert_equal '<ul><li>item 1</li><li>item 2</li></ul>', '[ul][li]item 1[/li][li]item 2[/li][/ul]'.bbcode_to_html
+    assert_equal '<ul><li>item 1</li><li>item 2</li></ul>', '[ul][*]item 1[li]item 2[/li][/ul]'.bbcode_to_html
+  end
+  
+  def test_definition_list_term_definition
+    assert_equal '<dl><dt>term 1</dt><dd>definition 1</dd><dt>term 2</dt><dd>definition 2</dd></dl>', '[dl][dt]term 1[/dt][dd]definition 1[/dd][dt]term 2[/dt][dd]definition 2[/dd][/dl]'.bbcode_to_html
+  end
+  
+  def test_quote
+    assert_equal '<fieldset><blockquote>quoting</blockquote></fieldset>', '[quote]quoting[/quote]'.bbcode_to_html
+    assert_equal '<fieldset><legend>"black"</legend><blockquote>si el niño hubiera sido de "penalty" le hubieran llamado <strong>system Error</strong>!!! :)</blockquote></fieldset>', "[quote:7a9ca2c5c3=\"black\"]si el niño hubiera sido de \"penalty\" le hubieran llamado [b:7a9ca2c5c3]system Error[/b:7a9ca2c5c3]!!! :)[/quote:7a9ca2c5c3]".bbcode_to_html
+    assert_equal '<fieldset><legend>Who</legend><blockquote>said that</blockquote></fieldset>', '[quote=Who]said that[/quote]'.bbcode_to_html
+  end
+  
+  def test_link
+    assert_equal '<a href="http://google.com">Google</a>', '[url=http://google.com]Google[/url]'.bbcode_to_html
+    assert_equal '<a href="http://google.com">http://google.com</a>', '[url]http://google.com[/url]'.bbcode_to_html
+  end
+  
+  def test_image
+    assert_equal '<img src="http://zoople/hochzeit.png" alt="" />', '[img]http://zoople/hochzeit.png[/img]'.bbcode_to_html
+    assert_equal '<img src="http://zoople/hochzeit.png" alt="" />', '[img=http://zoople/hochzeit.png]'.bbcode_to_html
+    assert_equal '<img src="http://zoople/hochzeit.png" style="width: 95px; height: 96px;" />', '[img size=95x96]http://zoople/hochzeit.png[/img]'.bbcode_to_html
+    # Image (resized 1): 
+    # Image (resized 2): [img size="96x96"]http://zoople/hochzeit.png[/img]
+    # Image (resized 3): [img size='96x96']http://zoople/hochzeit.png[/img]
+    # Image (invalid): [img]http://google.com/google.img[/img]
+  
+  end
+  
+  def test_youtube
+  end
+  
+  def test_google_video
+  end
+    
 end
