@@ -1,5 +1,5 @@
 module BBRuby
-  @@imageformats = 'png|bmp|jpg|gif'
+  @@imageformats = 'png|bmp|jpg|gif|jpeg'
   @@tags = {
     # tag name => [regex, replace, description, example, enable/disable symbol]
     'Bold' => [
@@ -75,8 +75,9 @@ module BBRuby
       'List item',
       'See ol or ul',
       :listitem],
+    # FIXME
     'List Item (alternative)' => [
-      /\[\*\](.*?)$/,
+      /\[\*\]([^\]].*?)$/,
       '<li>\1</li>',
       'List item (alternative)',
       nil, nil,
@@ -102,13 +103,13 @@ module BBRuby
       :definition],
   
     'Quote' => [
-      /\[quote(.*)?=(.*?)\](.*?)\[\/quote\1\]/m,
+      /\[quote(:.*)?=(.*?)\](.*?)\[\/quote\1?\]/m,
       '<fieldset><legend>\2</legend><blockquote>\3</blockquote></fieldset>',
       'Quote with citation',
       nil, nil,
       :quote],
     'Quote (Sourceless)' => [
-      /\[quote(.*)?\](.*?)\[\/quote\1\]/m,
+      /\[quote(:.*)?\](.*?)\[\/quote\1?\]/m,
       '<fieldset><blockquote>\2</blockquote></fieldset>',
       'Quote (sourceclass)',
       nil, nil,
@@ -135,14 +136,7 @@ module BBRuby
     #   '<a href="\1">\1</a>',
     #   'Hyperlink (automatic)',
     #   nil, nil,
-    #   :link],
-  
-    'Image' => [
-      /\[img(.+)?\]([^\[\]].*?)\.(#{@@imageformats})\[\/img\1\]/i,
-      '<img src="\2.\3" alt="" />',
-      'Display an image',
-      'Check out this crazy cat: [img]http://catsweekly.com/crazycat.jpg[/img]',
-      :image],
+    #   :link],  
     'Image (Alternative)' => [
       /\[img=([^\[\]].*?)\.(#{@@imageformats})\]/i,
       '<img src="\1.\2" alt="" />',
@@ -150,12 +144,17 @@ module BBRuby
       '[img=http://myimage.com/logo.gif]',
       :image],
     'Image (Resized)' => [
-      /\[img size=['"]?(\d+)x(\d+)['"]?\](.*?)\[\/img\]/i,
-      '<img src="\3" style="width: \1px; height: \2px;" />',
+      /\[img(.+)? size=(['"]?)(\d+)x(\d+)\2\](.*?)\[\/img\1?\]/i,
+      '<img src="\5" style="width: \3px; height: \4px;" />',
       'Display an image with a set width and height', 
       '[img size=96x96]http://www.google.com/intl/en_ALL/images/logo.gif[/img]',
       :image],
-      
+    'Image' => [
+      /\[img(.+)?\]([^\[\]].*?)\.(#{@@imageformats})\[\/img\1?\]/i,
+      '<img src="\2.\3" alt="" />',
+      'Display an image',
+      'Check out this crazy cat: [img]http://catsweekly.com/crazycat.jpg[/img]',
+      :image],    
     'YouTube' => [
       /\[youtube\](.*?)\?v=([\w\d\-]+).*\[\/youtube\]/i,
       '<object width="400" height="330"><param name="movie" value="http://www.youtube.com/v/\2"></param><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/\2" type="application/x-shockwave-flash" wmode="transparent" width="400" height="330"></embed></object>',
