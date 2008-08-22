@@ -77,7 +77,6 @@ THE SOFTWARE.
 
 ## TODO
 
-* fix the problem with images
-* add support for [email] tag
 * fix problem with alternative list item (the test is broken because of this bug)
 * complete the tests
+* create patterns for traslating tags: if you want to translate a bbcode tag in a different way than the standar. For example: `[quote] ~> <p><blockquote>text</blockquote></p>`

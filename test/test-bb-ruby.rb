@@ -49,16 +49,19 @@ class TestBBRuby < Test::Unit::TestCase
   def test_strong
     assert_equal '<strong>simple</strong>', '[b]simple[/b]'.bbcode_to_html
     assert_equal '<strong>simple</strong>', '[b:7a9ca2c5c3]simple[/b:7a9ca2c5c3]'.bbcode_to_html
+    assert_equal "<strong>line 1<br />line 2</strong>", "[b:7a9ca2c5c3]line 1\nline 2[/b:7a9ca2c5c3]".bbcode_to_html
   end
   
   def test_em
     assert_equal '<em>simple</em>', '[i]simple[/i]'.bbcode_to_html
     assert_equal '<em>simple</em>', '[i:7a9ca2c5c3]simple[/i:7a9ca2c5c3]'.bbcode_to_html
+    assert_equal "<em>line 1<br />line 2</em>", "[i:7a9ca2c5c3]line 1\nline 2[/i:7a9ca2c5c3]".bbcode_to_html
   end
   
   def test_u
     assert_equal '<u>simple</u>', '[u]simple[/u]'.bbcode_to_html
     assert_equal '<u>simple</u>', '[u:7a9ca2c5c3]simple[/u:7a9ca2c5c3]'.bbcode_to_html
+    assert_equal "<u>line 1<br />line 2</u>", "[u:7a9ca2c5c3]line 1\nline 2[/u:7a9ca2c5c3]".bbcode_to_html
   end
   
   def test_del
@@ -76,6 +79,7 @@ class TestBBRuby < Test::Unit::TestCase
   def test_code
     assert_equal '<code>simple</code>', '[code]simple[/code]'.bbcode_to_html
     assert_equal '<code>simple</code>', '[code:7a9ca2c5c3]simple[/code:7a9ca2c5c3]'.bbcode_to_html
+    assert_equal "<code>var bxi = 0;<br />//Holds current speed of scrolling menu</code>", "[code:1:91cbdd72b7]var bxi = 0;\n//Holds current speed of scrolling menu[/code:1:91cbdd72b7]".bbcode_to_html
   end  
   
   def test_size
@@ -97,6 +101,21 @@ class TestBBRuby < Test::Unit::TestCase
     assert_equal '<ul><li>item 1</li><li>item 2</li></ul>', '[ul][*]item 1[li]item 2[/li][/ul]'.bbcode_to_html
   end
   
+  def test_list_unordered
+    assert_equal '<ul><li>item 1</li><li>item 2</li></ul>', '[list][li]item 1[/li][li]item 2[/li][/list]'.bbcode_to_html
+    assert_equal '<ul><li>item 1</li><li>item 2</li></ul>', '[list:7a9ca2c5c3][li]item 1[/li][li]item 2[/li][/list:7a9ca2c5c3]'.bbcode_to_html
+  end
+
+  def test_list_ordered_numerically
+    assert_equal '<ol><li>item 1</li><li>item 2</li></ol>', '[list=1][li]item 1[/li][li]item 2[/li][/list]'.bbcode_to_html
+    assert_equal '<ol><li>item 1</li><li>item 2</li></ol>', '[list=1:7a9ca2c5c3][li]item 1[/li][li]item 2[/li][/list:7a9ca2c5c3]'.bbcode_to_html
+  end
+
+  def test_list_ordered_alphabetically
+    assert_equal '<ol sytle="list-style-type: lower-alpha;"><li>item 1</li><li>item 2</li></ol>', '[list=a][li]item 1[/li][li]item 2[/li][/list]'.bbcode_to_html
+    assert_equal '<ol sytle="list-style-type: lower-alpha;"><li>item 1</li><li>item 2</li></ol>', '[list=a:7a9ca2c5c3][li]item 1[/li][li]item 2[/li][/list:7a9ca2c5c3]'.bbcode_to_html
+  end
+  
   def test_definition_list_term_definition
     assert_equal '<dl><dt>term 1</dt><dd>definition 1</dd><dt>term 2</dt><dd>definition 2</dd></dl>', '[dl][dt]term 1[/dt][dd]definition 1[/dd][dt]term 2[/dt][dd]definition 2[/dd][/dl]'.bbcode_to_html
   end
@@ -110,6 +129,7 @@ class TestBBRuby < Test::Unit::TestCase
   def test_link
     assert_equal '<a href="http://google.com">Google</a>', '[url=http://google.com]Google[/url]'.bbcode_to_html
     assert_equal '<a href="http://google.com">http://google.com</a>', '[url]http://google.com[/url]'.bbcode_to_html
+    assert_equal '<a href="http://www.altctrlsupr.com/dmstk/kdd070803/00.html"> ABRIR ALBUM </a>','[URL=http://www.altctrlsupr.com/dmstk/kdd070803/00.html] ABRIR ALBUM [/URL]'.bbcode_to_html
   end
   
   def test_image
@@ -126,6 +146,10 @@ class TestBBRuby < Test::Unit::TestCase
   
   def test_google_video
     assert_equal '<embed style="width:400px; height:326px;" id="VideoPlayback" type="application/x-shockwave-flash" src="http://video.google.com/googleplayer.swf?docId=-2200109535941088987" flashvars=""> </embed>', '[gvideo]http://video.google.com/videoplay?docid=-2200109535941088987[/gvideo]'.bbcode_to_html
+  end
+  
+  def test_email
+    assert_equal '<a href="mailto:wadus@wadus.com">wadus@wadus.com</a>', '[email]wadus@wadus.com[/email]'.bbcode_to_html
   end
     
 end
