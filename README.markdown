@@ -5,7 +5,7 @@ bb-ruby is a [BBCode](http://www.bbcode.org) implementation for Ruby.
 It will convert strings with BBCode markup to their HTML equivalent.
 
 This version is a fork from original [bb-ruby](git://github.com/cpjolicoeur/bb-ruby) for adding support
-to the BBCode version of PphpBB forums ((doc)[http://www.phpbb.com/community/faq.php?mode=bbcode]), that adds some tag ids inside of each tag. For example:
+to the (BBCode version of PphpBB forums)[http://www.phpbb.com/community/faq.php?mode=bbcode], that adds some tag ids inside of each tag. For example:
 
 `[b:2131ds]some text[/b:2131ds]`
 
