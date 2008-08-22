@@ -201,21 +201,23 @@ module BBRuby
     ]
   }
 
-  def self.to_html(text, method = :disable, *tags)
+  def self.to_html(text, tags_alternative_definition = {}, method = :disable, *tags)
     text = text.clone
     # escape < and > to remove any html
     text.gsub!( '<', '&lt;' )
     text.gsub!( '>', '&gt;' )
+    
+    tags_definition = @@tags.merge(tags_alternative_definition)
 
     # parse bbcode tags
     case method
       when :enable
-        @@tags.each_value { |t|
+        tags_definition.each_value { |t|
           text.gsub!(t[0], t[1]) if tags.include?(t[4])
         }
       when :disable
         # this works nicely because the default is disable and the default set of tags is [] (so none disabled) :)
-        @@tags.each_value { |t|
+        tags_definition.each_value { |t|
           text.gsub!(t[0], t[1]) unless tags.include?(t[4])
         }
     end
@@ -234,14 +236,18 @@ module BBRuby
       yield tn, ti[2], ti[3] if ti[2]
     }
   end
+  
+  def self.tag_list
+    @@tags
+  end
 
 end
 
 class String
-  def bbcode_to_html(method = :disable, *tags)
-    BBRuby.to_html(self, method, tags)
+  def bbcode_to_html(tags_alternative_definition = {}, method = :disable, *tags)
+    BBRuby.to_html(self, tags_alternative_definition, method, tags)
   end
-  def bbcode_to_html!(method = :disable, *tags)
-    self.replace(BBRuby.to_html(self, method, tags))
+  def bbcode_to_html!(tags_alternative_definition = {}, method = :disable, *tags)
+    self.replace(BBRuby.to_html(self, tags_alternative_definition, method, tags))
   end
 end

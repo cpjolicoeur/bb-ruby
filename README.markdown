@@ -5,9 +5,12 @@ bb-ruby is a [BBCode](http://www.bbcode.org) implementation for Ruby.
 It will convert strings with BBCode markup to their HTML equivalent.
 
 This version is a fork from original [bb-ruby](git://github.com/cpjolicoeur/bb-ruby) for adding support
-to the (BBCode version of PphpBB forums)[http://www.phpbb.com/community/faq.php?mode=bbcode], that adds some tag ids inside of each tag. For example:
+to the [BBCode version of PphpBB forums](http://www.phpbb.com/community/faq.php?mode=bbcode), that adds some tag ids inside of each tag. For example:
 
 `[b:2131ds]some text[/b:2131ds]`
+
+I have been adding too another special features, like redefinition of the HTML that each BBCode tag should be translated to.
+
 
 ## Installation
 
@@ -18,6 +21,7 @@ To install as a plugin:
 To install as a gem:
 
 `sudo gem install cpjolicoeur-bb-ruby --source=http://gems.github.com/`
+
 
 ## Usage
 
@@ -33,20 +37,35 @@ BBRuby has been included directly into the String class for use on any string ob
 
 Only allow certain tags:
 
-`output = text.bbcode_to_html(:enable, :image, :bold, :quote)`
+`output = text.bbcode_to_html({}, :enable, :image, :bold, :quote)`
 
 Disable certain tags:
 
-`output = text.bbcode_to_html(:disable, :image, :bold, :quote)`
+`output = text.bbcode_to_html({}, :disable, :image, :bold, :quote)`
 
 Alternative Direct usage:
 
 `output = BBRuby.to_html(bbcode_markup)`
 
+Define your own translation, in order to be more flexible:
+
+    my_blockquote = {
+      'Quote' => [
+        /\[quote(:.*)?=(.*?)\](.*?)\[\/quote\1?\]/mi,
+        '<div class="quote"><p><cite>\2</cite></p><blockquote>\3</blockquote></div>',
+        'Quote with citation',
+        nil, nil,
+        :quote],      
+    }
+ 
+    text.bbcode_to_html(my_blockquote)
+
+
 ## Developers
 
-* [Craig P Jolicoeur](http://github.com/cpjolicoeur)
 * [Fernando Blat](http://github.com/ferblape)
+* [Craig P Jolicoeur](http://github.com/cpjolicoeur)
+
 
 ## License
 
@@ -70,13 +89,14 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
+
 ## Acknowledgements
 
 * [ruby-bbcode project](http://code.google.com/p/ruby-bbcode/)
 * [Nazgum's Blog](http://www.nazgum.com/2008/01/08/bbcode-with-ruby-on-rails-part-1/)
 
+
 ## TODO
 
 * fix problem with alternative list item (the test is broken because of this bug)
 * complete the tests
-* create patterns for traslating tags: if you want to translate a bbcode tag in a different way than the standar. For example: `[quote] ~> <p><blockquote>text</blockquote></p>`
