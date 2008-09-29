@@ -53,17 +53,25 @@ class TestBBRuby < Test::Unit::TestCase
   
   def test_ordered_list
     assert_equal '<ol><li>item 1</li><li>item 2</li></ol>', '[ol][li]item 1[/li][li]item 2[/li][/ol]'.bbcode_to_html
-    assert_equal '<ol><li>item 1</li><li>item 2</li></ol>', '[ol][*]item 1[li]item 2[/li][/ol]'.bbcode_to_html
+    assert_equal '<ol><li>item 1</li><li>item 2</li></ol>', '[ol][*]item 1[*]item 2[/ol]'.bbcode_to_html
   end
 
   def test_unordered_list
     assert_equal '<ul><li>item 1</li><li>item 2</li></ul>', '[ul][li]item 1[/li][li]item 2[/li][/ul]'.bbcode_to_html
-    assert_equal '<ul><li>item 1</li><li>item 2</li></ul>', '[ul][*]item 1[li]item 2[/li][/ul]'.bbcode_to_html
+    assert_equal '<ul><li>item 1</li><li>item 2</li></ul>', '[ul][*]item 1[*]item 2[/ul]'.bbcode_to_html
   end
   
   def test_list_unordered
     assert_equal '<ul><li>item 1</li><li>item 2</li></ul>', '[list][li]item 1[/li][li]item 2[/li][/list]'.bbcode_to_html
-    assert_equal '<ul><li>item 1</li><li>item 2</li></ul>', '[list:7a9ca2c5c3][li]item 1[/li][li]item 2[/li][/list:7a9ca2c5c3]'.bbcode_to_html
+    assert_equal '<ul><li>item 1</li><li>item 2</li></ul>', '[list:7a9ca2c5c3][li]item 1[/li][li]item 2[/li][/list:o:7a9ca2c5c3]'.bbcode_to_html
+    assert_equal '<ul><li>item 1</li><li>item 2</li></ul><ul><li>item 1</li><li>item 2</li></ul>', 
+                 '[list:7a9ca2c5c3][li]item 1[/li][li]item 2[/li][/list:o:7a9ca2c5c3][list:7a9ca2c5c3][li]item 1[/li][li]item 2[/li][/list:o:7a9ca2c5c3]'.bbcode_to_html
+  end
+  
+  def test_list_unordered_alternative
+    assert_equal '<li>item1</li><li>item2</li>', '[*:asdf]item1[*:asdf]item2'.bbcode_to_html
+    assert_equal '<ul><li>item1</li><li>item2</li></ul>', '[list:5d7cf5560a][*]item1[*]item2[/list:u:5d7cf5560a]'.bbcode_to_html
+    assert_equal '<ul><li>item1</li><li>item2</li></ul>', '[list:5d7cf5560a][*:5d7cf5560a]item1[*:5d7cf5560a]item2[/list:u:5d7cf5560a]'.bbcode_to_html
   end
 
   def test_list_ordered_numerically
@@ -73,7 +81,12 @@ class TestBBRuby < Test::Unit::TestCase
 
   def test_list_ordered_alphabetically
     assert_equal '<ol sytle="list-style-type: lower-alpha;"><li>item 1</li><li>item 2</li></ol>', '[list=a][li]item 1[/li][li]item 2[/li][/list]'.bbcode_to_html
-    assert_equal '<ol sytle="list-style-type: lower-alpha;"><li>item 1</li><li>item 2</li></ol>', '[list=a:7a9ca2c5c3][li]item 1[/li][li]item 2[/li][/list:7a9ca2c5c3]'.bbcode_to_html
+    assert_equal '<ol sytle="list-style-type: lower-alpha;"><li>item 1</li><li>item 2</li></ol>', '[list=a:7a9ca2c5c3][li]item 1[/li][li]item 2[/li][/list:o:7a9ca2c5c3]'.bbcode_to_html
+  end
+  
+  def test_two_lists
+    assert_equal '<ul><li>item1</li><li>item2</li></ul><ul><li>item1</li><li>item2</li></ul>', 
+                 '[list:5d7cf5560a][*:5d7cf5560a]item1[*:5d7cf5560a]item2[/list:u:5d7cf5560a][list:5d7cf5560a][*:5d7cf5560a]item1[*:5d7cf5560a]item2[/list:u:5d7cf5560a]'.bbcode_to_html
   end
   
   def test_definition_list_term_definition
@@ -82,8 +95,16 @@ class TestBBRuby < Test::Unit::TestCase
   
   def test_quote
     assert_equal '<fieldset><blockquote>quoting</blockquote></fieldset>', '[quote]quoting[/quote]'.bbcode_to_html
-    assert_equal '<fieldset><legend>"black"</legend><blockquote>si el niño hubiera sido de "penalty" le hubieran llamado <strong>system Error</strong>!!! :)</blockquote></fieldset>', "[quote:7a9ca2c5c3=\"black\"]si el niño hubiera sido de \"penalty\" le hubieran llamado [b:7a9ca2c5c3]system Error[/b:7a9ca2c5c3]!!! :)[/quote:7a9ca2c5c3]".bbcode_to_html
+    assert_equal '<fieldset><blockquote>quoting</blockquote></fieldset>', '[quote]quoting[/quote]'.bbcode_to_html.bbcode_to_html({}, :disable, false)
+    assert_equal '<fieldset><legend>black</legend><blockquote>si el niño hubiera sido de "penalty" le hubieran llamado <strong>system Error</strong>!!! :)</blockquote></fieldset>', "[quote:7a9ca2c5c3=\"black\"]si el niño hubiera sido de \"penalty\" le hubieran llamado [b:7a9ca2c5c3]system Error[/b:7a9ca2c5c3]!!! :)[/quote:7a9ca2c5c3]".bbcode_to_html
+    assert_equal '<fieldset><legend>black</legend><blockquote>si el niño hubiera sido de "penalty" le hubieran llamado <strong>system Error</strong>!!! :)</blockquote></fieldset>', "[quote:7a9ca2c5c3=\"black\"]si el niño hubiera sido de \"penalty\" le hubieran llamado [b:7a9ca2c5c3]system Error[/b:7a9ca2c5c3]!!! :)[/quote:7a9ca2c5c3]".bbcode_to_html.bbcode_to_html({}, :disable, false)
     assert_equal '<fieldset><legend>Who</legend><blockquote>said that</blockquote></fieldset>', '[quote=Who]said that[/quote]'.bbcode_to_html
+    assert_equal '<fieldset><legend>Who</legend><blockquote>said that</blockquote></fieldset>', '[quote=Who]said that[/quote]'.bbcode_to_html.bbcode_to_html({}, :disable, false)
+  end
+  
+  def test_doble_quote
+   assert_equal '<fieldset><legend>Kitten</legend><blockquote><fieldset><legend>creatiu</legend><blockquote>f1</blockquote></fieldset>f2</blockquote></fieldset>',
+                '[quote:26fe26a6a9="Kitten"][quote:26fe26a6a9="creatiu"]f1[/quote:26fe26a6a9]f2[/quote:26fe26a6a9]'.bbcode_to_html.bbcode_to_html({}, :disable, false)
   end
   
   def test_link
@@ -116,15 +137,35 @@ class TestBBRuby < Test::Unit::TestCase
   end
   
   def test_redefinition_of_tag_html
-    my_blockquote = {
+    mydef = {
       'Quote' => [
-        /\[quote(:.*)?=(.*?)\](.*?)\[\/quote\1?\]/mi,
+        /\[quote(:.*)?="?(.*?)"?\](.*?)\[\/quote\1?\]/mi,
         '<div class="quote"><p><cite>\2</cite></p><blockquote>\3</blockquote></div>',
         'Quote with citation',
         nil, nil,
-        :quote],      
+        :quote],
+      'Image (Resized)' => [
+        /\[img(:.+)? size=(['"]?)(\d+)x(\d+)\2\](.*?)\[\/img\1?\]/im,
+        '<div class="post_image"><img src="\5" style="width: \3px; height: \4px;" /></div>',
+        'Display an image with a set width and height', 
+        '[img size=96x96]http://www.google.com/intl/en_ALL/images/logo.gif[/img]',
+        :image],
+      'Image (Alternative)' => [
+        /\[img=([^\[\]].*?)\.(png|bmp|jpg|gif|jpeg)\]/im,
+        '<div class="post_image"><img src="\1.\2" alt="" /></div>',
+        'Display an image (alternative format)', 
+        '[img=http://myimage.com/logo.gif]',
+        :image],
+      'Image' => [
+        /\[img(:.+)?\]([^\[\]].*?)\.(png|bmp|jpg|gif|jpeg)\[\/img\1?\]/im,
+        '<div class="post_image"><img src="\2.\3" alt="" /></div>',
+        'Display an image',
+        'Check out this crazy cat: [img]http://catsweekly.com/crazycat.jpg[/img]',
+        :image],      
     }
-    assert_equal '<div class="quote"><p><cite>Who</cite></p><blockquote>said that</blockquote></div>', '[quote=Who]said that[/quote]'.bbcode_to_html(my_blockquote)
+    assert_equal '<div class="quote"><p><cite>Who</cite></p><blockquote>said that</blockquote></div>', '[quote=Who]said that[/quote]'.bbcode_to_html(mydef)
+    assert_equal '<div class="quote"><p><cite>flandepan</cite></p><blockquote>hola</blockquote></div>', '[quote:0fc8a224d2="flandepan"]hola[/quote:0fc8a224d2]'.bbcode_to_html(mydef)
+    assert_equal '<div class="post_image"><img src="http://zoople/hochzeit.png" alt="" /></div>', '[img]http://zoople/hochzeit.png[/img]'.bbcode_to_html(mydef)
   end
 
 end

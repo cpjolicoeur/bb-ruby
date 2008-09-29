@@ -77,32 +77,30 @@ module BBRuby
       'List item',
       'See ol or ul',
       :listitem],
+    'List Item (alternative)' => [
+      /\[\*(:[^\[]+)?\]([^(\[|\<)]+)/mi,
+      '<li>\2</li>',
+      'List item (alternative)',
+      nil, nil,
+      :listitem],
     'Unordered list (alternative)' => [
-      /\[list(:.*)?\](.+)\[\/list\1?\]/mi,
-      '<ul>\2</ul>',
+      /\[(list)(:.*)?\](.+)\[\/list(:.)?\2?\]/mi,
+      '<ul>\3</ul>',
       'Unordered list item',
       '[list][*]item 1[*] item2[/list]',
       :list],
     'Ordered list (numerical)' => [
-      /\[list=1(:.*)?\](.+)\[\/list\1?\]/mi,
+      /\[list=1(:.*)?\](.+)\[\/list(:.)?\1?\]/mi,
       '<ol>\2</ol>',
       'Ordered list numerically',
       '[list=1][*]item 1[*] item2[/list]',
       :list],
     'Ordered list (alphabetical)' => [
-      /\[list=a(:.*)?\](.+)\[\/list\1?\]/mi,
+      /\[list=a(:.*)?\](.+)\[\/list(:.)?\1?\]/mi,
       '<ol sytle="list-style-type: lower-alpha;">\2</ol>',
       'Ordered list alphabetically',
       '[list=a][*]item 1[*] item2[/list]',
       :list],
-    # FIXME
-    'List Item (alternative)' => [
-      /\[\*\]([^\]].*?)$/mi,
-      '<li>\1</li>',
-      'List item (alternative)',
-      nil, nil,
-      :listitem],
-  
     'Definition List' => [
       /\[dl\](.*?)\[\/dl\]/im,
       '<dl>\1</dl>',
@@ -121,9 +119,8 @@ module BBRuby
       'Definition definitions',
       nil, nil,
       :definition],
-  
     'Quote' => [
-      /\[quote(:.*)?=(.*?)\](.*?)\[\/quote\1?\]/mi,
+      /\[quote(:.*)?="?(.*?)"?\](.*?)\[\/quote\1?\]/mi,
       '<fieldset><legend>\2</legend><blockquote>\3</blockquote></fieldset>',
       'Quote with citation',
       nil, nil,
@@ -201,11 +198,13 @@ module BBRuby
     ]
   }
 
-  def self.to_html(text, tags_alternative_definition = {}, method = :disable, *tags)
+  def self.to_html(text, tags_alternative_definition = {}, method = :disable, escape_html = true, *tags)
     text = text.clone
     # escape < and > to remove any html
-    text.gsub!( '<', '&lt;' )
-    text.gsub!( '>', '&gt;' )
+    if escape_html 
+      text.gsub!( '<', '&lt;' )
+      text.gsub!( '>', '&gt;' )
+    end
     
     tags_definition = @@tags.merge(tags_alternative_definition)
 
@@ -244,8 +243,8 @@ module BBRuby
 end
 
 class String
-  def bbcode_to_html(tags_alternative_definition = {}, method = :disable, *tags)
-    BBRuby.to_html(self, tags_alternative_definition, method, tags)
+  def bbcode_to_html(tags_alternative_definition = {}, method = :disable, escape_html = true, *tags)
+    BBRuby.to_html(self, tags_alternative_definition, method, escape_html, tags)
   end
   def bbcode_to_html!(tags_alternative_definition = {}, method = :disable, *tags)
     self.replace(BBRuby.to_html(self, tags_alternative_definition, method, tags))
