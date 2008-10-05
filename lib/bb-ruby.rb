@@ -58,7 +58,6 @@ module BBRuby
       'Change text color',
       '[color=red]This is red text[/color]',
       :color],
-  
     'Ordered List' => [
       /\[ol\](.*?)\[\/ol\]/mi,
       '<ol>\1</ol>',
@@ -84,8 +83,8 @@ module BBRuby
       nil, nil,
       :listitem],
     'Unordered list (alternative)' => [
-      /\[(list)(:.*)?\](.+)\[\/list(:.)?\2?\]/mi,
-      '<ul>\3</ul>',
+      /\[list(:.*)?\]((?:(?!list).)*)\[\/list(:.)?\1?\]/mi,
+      '<ul>\2</ul>',
       'Unordered list item',
       '[list][*]item 1[*] item2[/list]',
       :list],
@@ -217,7 +216,9 @@ module BBRuby
       when :disable
         # this works nicely because the default is disable and the default set of tags is [] (so none disabled) :)
         tags_definition.each_value { |t|
-          text.gsub!(t[0], t[1]) unless tags.include?(t[4])
+          unless tags.include?(t[4])
+            text.gsub!(t[0], t[1])
+          end
         }
     end
 
