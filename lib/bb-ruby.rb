@@ -53,8 +53,8 @@ module BBRuby
       '[size=20]Here is some larger text[/size]',
       :size],
     'Color' => [
-      /\[color=['"]?(.*?)['"]?\](.*?)\[\/color\]/im,
-      '<span style="color: \1;">\2</span>',
+      /\[color=['"]?(\w+|\#\w{6})['"]?(:.+)?\](.*?)\[\/color\2?\]/im,
+      '<span style="color: \1;">\3</span>',
       'Change text color',
       '[color=red]This is red text[/color]',
       :color],
