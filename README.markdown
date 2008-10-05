@@ -98,5 +98,4 @@ THE SOFTWARE.
 
 ## TODO
 
-* fix problem with alternative list item (the test is broken because of this bug)
-* complete the tests
+
