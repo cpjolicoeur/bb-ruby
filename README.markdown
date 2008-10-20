@@ -4,7 +4,7 @@ bb-ruby is a [BBCode](http://www.bbcode.org) implementation for Ruby.
 
 It will convert strings with BBCode markup to their HTML equivalent.
 
-This version includes additional features added by [Fernando Blat](http://github.com/ferblape/bb-ruby) for supporting the [BBCode version of PhpBB forums](http://www.phpbb.com/community/faq.php?mode=bbcode) and for adding tag IDs inside each tag:
+The latest version includes additional features added by [Fernando Blat](http://github.com/ferblape/bb-ruby) for supporting the [BBCode version of PhpBB forums](http://www.phpbb.com/community/faq.php?mode=bbcode) and for adding tag IDs inside each tag:
 
 `[b:2131ds]some text[/b:2131ds]`
 
@@ -26,11 +26,9 @@ To install as a gem:
 
 BBRuby has been included directly into the String class for use on any string object:
 
-`text = "[b]Here is some bold text[/b] followed by some [u]underlined text[/u]"`
-
-`output = text.bbcode_to_html`
-
-`text.bbcode_to_html!`
+	text = "[b]Here is some bold text[/b] followed by some [u]underlined text[/u]"
+	output = text.bbcode_to_html
+	text.bbcode_to_html!
 
 Only allow certain tags:
 
