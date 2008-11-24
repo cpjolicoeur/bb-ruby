@@ -30,13 +30,17 @@ BBRuby has been included directly into the String class for use on any string ob
 	output = text.bbcode_to_html
 	text.bbcode_to_html!
 
+BBRuby will auto-escape HTML tags.  To prevent this just pass false as the second param:
+
+` output = text.bbcode_to_html({}, false)
+
 Only allow certain tags:
 
-`output = text.bbcode_to_html({}, :enable, :image, :bold, :quote)`
+`output = text.bbcode_to_html({}, true, :enable, :image, :bold, :quote)`
 
 Disable certain tags:
 
-`output = text.bbcode_to_html({}, :disable, :image, :bold, :quote)`
+`output = text.bbcode_to_html({}, true, :disable, :image, :bold, :quote)`
 
 Alternative Direct usage:
 

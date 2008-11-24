@@ -98,16 +98,16 @@ class TestBBRuby < Test::Unit::TestCase
   
   def test_quote
     assert_equal '<fieldset><blockquote>quoting</blockquote></fieldset>', '[quote]quoting[/quote]'.bbcode_to_html
-    assert_equal '<fieldset><blockquote>quoting</blockquote></fieldset>', '[quote]quoting[/quote]'.bbcode_to_html.bbcode_to_html({}, :disable, false)
+    assert_equal '<fieldset><blockquote>quoting</blockquote></fieldset>', '[quote]quoting[/quote]'.bbcode_to_html.bbcode_to_html({}, false, :disable)
     assert_equal '<fieldset><legend>black</legend><blockquote>si el niño hubiera sido de "penalty" le hubieran llamado <strong>system Error</strong>!!! :)</blockquote></fieldset>', "[quote:7a9ca2c5c3=\"black\"]si el niño hubiera sido de \"penalty\" le hubieran llamado [b:7a9ca2c5c3]system Error[/b:7a9ca2c5c3]!!! :)[/quote:7a9ca2c5c3]".bbcode_to_html
-    assert_equal '<fieldset><legend>black</legend><blockquote>si el niño hubiera sido de "penalty" le hubieran llamado <strong>system Error</strong>!!! :)</blockquote></fieldset>', "[quote:7a9ca2c5c3=\"black\"]si el niño hubiera sido de \"penalty\" le hubieran llamado [b:7a9ca2c5c3]system Error[/b:7a9ca2c5c3]!!! :)[/quote:7a9ca2c5c3]".bbcode_to_html.bbcode_to_html({}, :disable, false)
+    assert_equal '<fieldset><legend>black</legend><blockquote>si el niño hubiera sido de "penalty" le hubieran llamado <strong>system Error</strong>!!! :)</blockquote></fieldset>', "[quote:7a9ca2c5c3=\"black\"]si el niño hubiera sido de \"penalty\" le hubieran llamado [b:7a9ca2c5c3]system Error[/b:7a9ca2c5c3]!!! :)[/quote:7a9ca2c5c3]".bbcode_to_html.bbcode_to_html({}, false, :disable)
     assert_equal '<fieldset><legend>Who</legend><blockquote>said that</blockquote></fieldset>', '[quote=Who]said that[/quote]'.bbcode_to_html
-    assert_equal '<fieldset><legend>Who</legend><blockquote>said that</blockquote></fieldset>', '[quote=Who]said that[/quote]'.bbcode_to_html.bbcode_to_html({}, :disable, false)
+    assert_equal '<fieldset><legend>Who</legend><blockquote>said that</blockquote></fieldset>', '[quote=Who]said that[/quote]'.bbcode_to_html.bbcode_to_html({}, false, :disable)
   end
   
-  def test_doble_quote
+  def test_double_quote
    assert_equal '<fieldset><legend>Kitten</legend><blockquote><fieldset><legend>creatiu</legend><blockquote>f1</blockquote></fieldset>f2</blockquote></fieldset>',
-                '[quote:26fe26a6a9="Kitten"][quote:26fe26a6a9="creatiu"]f1[/quote:26fe26a6a9]f2[/quote:26fe26a6a9]'.bbcode_to_html.bbcode_to_html({}, :disable, false)
+                '[quote:26fe26a6a9="Kitten"][quote:26fe26a6a9="creatiu"]f1[/quote:26fe26a6a9]f2[/quote:26fe26a6a9]'.bbcode_to_html.bbcode_to_html({}, false, :disable)
   end
   
   def test_link
@@ -137,6 +137,15 @@ class TestBBRuby < Test::Unit::TestCase
   
   def test_email
     assert_equal '<a href="mailto:wadus@wadus.com">wadus@wadus.com</a>', '[email]wadus@wadus.com[/email]'.bbcode_to_html
+  end
+
+  def test_html_escaping
+    assert_equal "<strong>&lt;i&gt;foobar&lt;/i&gt;</strong>", '[b]<i>foobar</i>[/b]'.bbcode_to_html
+    assert_equal "<strong><i>foobar</i></strong>", '[b]<i>foobar</i>[/b]'.bbcode_to_html({}, false)
+    assert_equal "1 is &lt; 2", '1 is < 2'.bbcode_to_html
+    assert_equal "1 is < 2", '1 is < 2'.bbcode_to_html({}, false)
+    assert_equal "2 is &gt; 1", '2 is > 1'.bbcode_to_html
+    assert_equal "2 is > 1", '2 is > 1'.bbcode_to_html({}, false)
   end
   
   def test_redefinition_of_tag_html

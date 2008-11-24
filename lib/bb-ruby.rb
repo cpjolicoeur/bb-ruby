@@ -197,7 +197,7 @@ module BBRuby
     ]
   }
 
-  def self.to_html(text, tags_alternative_definition = {}, method = :disable, escape_html = true, *tags)
+  def self.to_html(text, tags_alternative_definition = {}, escape_html=true, method=:disable, *tags)
     text = text.clone
     # escape < and > to remove any html
     if escape_html 
@@ -244,10 +244,10 @@ module BBRuby
 end
 
 class String
-  def bbcode_to_html(tags_alternative_definition = {}, method = :disable, escape_html = true, *tags)
-    BBRuby.to_html(self, tags_alternative_definition, method, escape_html, tags)
+  def bbcode_to_html(tags_alternative_definition = {}, escape_html=true, method=:disable, *tags)
+    BBRuby.to_html(self, tags_alternative_definition, escape_html, method, tags)
   end
-  def bbcode_to_html!(tags_alternative_definition = {}, method = :disable, *tags)
-    self.replace(BBRuby.to_html(self, tags_alternative_definition, method, tags))
+  def bbcode_to_html!(tags_alternative_definition = {}, escape_html=true, method=:disable, *tags)
+    self.replace(BBRuby.to_html(self, tags_alternative_definition, escape_html, method, tags))
   end
 end
