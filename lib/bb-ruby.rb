@@ -170,7 +170,6 @@ module BBRuby
       'Display an image',
       'Check out this crazy cat: [img]http://catsweekly.com/crazycat.jpg[/img]',
       :image],   
-       
     'YouTube' => [
       /\[youtube\](.*?)\?v=([\w\d\-]+).*\[\/youtube\]/im,
       '<object width="400" height="330"><param name="movie" value="http://www.youtube.com/v/\2"></param><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/\2" type="application/x-shockwave-flash" wmode="transparent" width="400" height="330"></embed></object>',
