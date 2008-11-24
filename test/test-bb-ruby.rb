@@ -159,6 +159,16 @@ class TestBBRuby < Test::Unit::TestCase
     assert_equal "<strong>[i]foobar[/i]</strong>", "[b][i]foobar[/i][/b]".bbcode_to_html({}, true, :enable, :bold)
     assert_equal "<strong><em>foobar</em></strong>", "[b][i]foobar[/i][/b]".bbcode_to_html({}, true, :enable, :bold, :italics)
   end
+
+  def test_to_html_bang_method
+    foo = "[b]foobar[/b]"
+    assert_equal "<strong>foobar</strong>", foo.bbcode_to_html!
+    assert_equal "<strong>foobar</strong>", foo
+  end
+
+  def test_self_tag_list
+    assert_equal 30, BBRuby.tag_list.size
+  end
   
   def test_redefinition_of_tag_html
     mydef = {
