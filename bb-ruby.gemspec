@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name = "bb-ruby"
-  s.version = "0.6.1"
-  s.date = "2008-06-27"
+  s.version = "0.8.0"
+  s.date = "2008-11-24"
   s.summary = "BBCode conversion library for Ruby"
   s.email = "cpjolicoeur@gmail.com"
   s.homepage = "http://github.com/cpjolicoeur/bb-ruby"
