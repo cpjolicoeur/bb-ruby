@@ -63,35 +63,35 @@ Define your own translation, in order to be more flexible:
 
 The following is the list of BBCode tags processed by BBRuby and their associated symbol for enabling/disabling them
 
-* [b]               :bold
-* [i]               :italics
-* [u]               :underline
-* [s]               :strikeout 
-* [del]             :delete
-* [ins]             :insert
-* [code]            :code
-* [size]            :size
-* [color]           :color
-* [ol]              :orderedlist
-* [ul]              :unorderedlist
-* [li]              :listitem    
-* [\*]              :listitem
-* [list]            :listitem
-* [list=1]          :listitem
-* [list=a]          :listitem
-* [dl]              :definelist
-* [dt]              :defineterm
-* [dd]              :definition
-* [quote]           :quote
-* [quote="source"]  :quote
-* [url=]            :link
-* [url]             :link
-* [img size=]       :image
-* [img=]            :image
-* [img]             :image
-* [youtube]         :video  
-* [gvideo]          :video
-* [email]           :email
+* \[b\]               :bold
+* \[i\]               :italics
+* \[u\]               :underline
+* \[s\]               :strikeout 
+* \[del\]             :delete
+* \[ins\]             :insert
+* \[code\]            :code
+* \[size\]            :size
+* \[color\]           :color
+* \[ol\]              :orderedlist
+* \[ul\]              :unorderedlist
+* \[li\]              :listitem    
+* \[\*\]              :listitem
+* \[list\]            :listitem
+* \[list=1\]          :listitem
+* \[list=a\]          :listitem
+* \[dl\]              :definelist
+* \[dt\]              :defineterm
+* \[dd\]              :definition
+* \[quote\]           :quote
+* \[quote=source\]  :quote
+* \[url=link\]            :link
+* \[url\]             :link
+* \[img size=\]       :image
+* \[img=\]            :image
+* \[img\]             :image
+* \[youtube\]         :video  
+* \[gvideo\]          :video
+* \[email\]           :email
 
 ## Developers
 
