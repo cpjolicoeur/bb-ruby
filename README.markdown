@@ -75,7 +75,7 @@ The following is the list of BBCode tags processed by BBRuby and their associate
 * [ol]              :orderedlist
 * [ul]              :unorderedlist
 * [li]              :listitem    
-* [*]               :listitem
+* [\*]              :listitem
 * [list]            :listitem
 * [list=1]          :listitem
 * [list=a]          :listitem
