@@ -80,7 +80,7 @@ module BBRuby
       /\[\*(:[^\[]+)?\]([^(\[|\<)]+)/mi,
       '<li>\2</li>',
       'List item (alternative)',
-      nil, nil,
+      '[*]list item',
       :listitem],
     'Unordered list (alternative)' => [
       /\[list(:.*)?\]((?:(?!list).)*)\[\/list(:.)?\1?\]/mi,
@@ -110,38 +110,37 @@ module BBRuby
       /\[dt\](.*?)\[\/dt\]/mi,
       '<dt>\1</dt>',
       'List of definition terms',
-      nil, nil,
+      '[dt]definition term[/dt]',
       :defineterm],
     'Definition Definition' => [
       /\[dd\](.*?)\[\/dd\]/mi,
       '<dd>\1</dd>',
       'Definition definitions',
-      nil, nil,
+      '[dd]my definition[/dd',
       :definition],
     'Quote' => [
       /\[quote(:.*)?="?(.*?)"?\](.*?)\[\/quote\1?\]/mi,
       '<fieldset><legend>\2</legend><blockquote>\3</blockquote></fieldset>',
       'Quote with citation',
-      nil, nil,
+      "[quote=mike]Now is the time...[/quote]",
       :quote],
     'Quote (Sourceless)' => [
       /\[quote(:.*)?\](.*?)\[\/quote\1?\]/mi,
       '<fieldset><blockquote>\2</blockquote></fieldset>',
       'Quote (sourceclass)',
-      nil, nil,
+      "[quote]Now is the time...[/quote]",
       :quote],
     'Link' => [
       /\[url=(.*?)\](.*?)\[\/url\]/mi,
       '<a href="\1">\2</a>',
       'Hyperlink to somewhere else',
       'Maybe try looking on [url=http://google.com]Google[/url]?',
-      nil, nil,
       :link],
     'Link (Implied)' => [
       /\[url\](.*?)\[\/url\]/mi,
       '<a href="\1">\1</a>',
       'Hyperlink (implied)',
-      nil, nil,
+      "Maybe try looking on [url]http://google.com[/url]",
       :link],
     # 
     # TODO: fix automatic links

@@ -202,4 +202,9 @@ class TestBBRuby < Test::Unit::TestCase
     assert_equal '<div class="post_image"><img src="http://zoople/hochzeit.png" alt="" /></div>', '[img]http://zoople/hochzeit.png[/img]'.bbcode_to_html(mydef)
   end
 
+  def test_multiple_tag_test
+    assert_equal "<strong>bold</strong><em>italic</em><u>underline</u><fieldset><blockquote>quote</blockquote></fieldset><a href=\"foobar\">link</a>", "[b]bold[/b][i]italic[/i][u]underline[/u][quote]quote[/quote][url=foobar]link[/url]".bbcode_to_html
+    assert_equal "<strong>bold</strong><em>italic</em><u>underline</u><fieldset><blockquote>quote</blockquote></fieldset><a href=\"foobar\">link</a>", "[b]bold[/b][i]italic[/i][u]underline[/u][quote]quote[/quote][url=foobar]link[/url]".bbcode_to_html({}, true, :enable, :bold, :italics, :underline, :link, :quote)
+  end
+
 end
