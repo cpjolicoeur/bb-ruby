@@ -1,0 +1,2 @@
+
+For more information on bb-ruby, see http://bb-ruby.rubyforge.org

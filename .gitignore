@@ -1,1 +1,10 @@
 coverage/*
+doc
+log
+tmp
+pkg
+debug.log
+config
+script
+.DS_Store
+website

@@ -1,0 +1,4 @@
+== 0.8.2 2008-12-16
+
+* No major enhancements:
+  * Small point release for moving gem from Github to RubyForge
