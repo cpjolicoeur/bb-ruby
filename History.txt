@@ -1,3 +1,7 @@
+== 0.8.3 2008-12-16
+
+* RDoc documentation updates
+
 == 0.8.2 2008-12-16
 
 * No major enhancements:
