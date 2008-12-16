@@ -1,10 +1,10 @@
-= bb-ruby
+= BBRuby
 
 * http://bb-ruby.rubyforge.org
 
 == DESCRIPTION:
 
-bb-ruby is a BBCode (http://www.bbcode.org) implementation for Ruby. It will convert strings with BBCode markup to their HTML equivalent.
+BBRuby is a BBCode (http://www.bbcode.org) implementation for Ruby. It will convert strings with BBCode markup to their HTML equivalent.
 
 == INSTALL:
 
