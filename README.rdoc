@@ -6,6 +6,16 @@
 
 bb-ruby is a BBCode (http://www.bbcode.org) implementation for Ruby. It will convert strings with BBCode markup to their HTML equivalent.
 
+== INSTALL:
+
+To install as a gem:
+
+  sudo gem install bb-ruby
+  
+To Install as a plugin:
+  
+  ./script/plugin install git://github.com/cpjolicoeur/bb-ruby.git
+
 == USAGE:
 
   require 'bb-ruby' # (only needed if installed as a gem)
@@ -45,16 +55,6 @@ Define your own translation, in order to be more flexible:
     }
  
     text.bbcode_to_html(my_blockquote)
-
-== INSTALL:
-
-To install as a gem:
-
-  sudo gem install bb-ruby
-  
-To Install as a plugin:
-  
-  ./script/plugin install git://github.com/cpjolicoeur/bb-ruby.git
 
 == TAGS PROCESSED:
 
