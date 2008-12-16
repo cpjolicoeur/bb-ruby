@@ -1,7 +1,6 @@
 #! /usr/bin/env ruby
 
-require 'test/unit'
-require File.expand_path(File.join(File.dirname(__FILE__), '/../lib/bb-ruby'))
+require File.dirname(__FILE__) + '/test_helper.rb'
 
 class TestBBRuby < Test::Unit::TestCase
 
