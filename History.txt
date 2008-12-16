@@ -2,3 +2,4 @@
 
 * No major enhancements:
   * Small point release for moving gem from Github to RubyForge
+  * Gem is no longer served from github via cpjolicoeur-bbruby.  Gem is now served directly from Rubyforge via bb-ruby 
