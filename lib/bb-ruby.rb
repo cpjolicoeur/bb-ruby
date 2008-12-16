@@ -1,7 +1,10 @@
+$:.unshift(File.dirname(__FILE__)) unless
+  $:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
+
 module BBRuby
+  VERSION = '0.8.2'
 
   @@imageformats = 'png|bmp|jpg|gif|jpeg'
-
   @@tags = {
     # tag name => [regex, replace, description, example, enable/disable symbol]
     'Bold' => [
@@ -232,7 +235,6 @@ module BBRuby
   def self.tag_list
     @@tags
   end
-
 end
 
 class String
