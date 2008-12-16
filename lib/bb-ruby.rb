@@ -274,12 +274,54 @@ module BBRuby
 end # class BBRuby
 
 class String
+  # Convert a string with BBCode markup into its corresponding HTML markup
+  #
+  # === Basic Usage
+  #
+  #   text = "[b]some bold text to markup[/b]"
+  #   output = text.bbcode_to_html
+  #   # output => "<strong>some bold text to markup</strong>"
+  #
+  # === Custom BBCode translations
+  #
+  # You can supply your own BBCode markup translations to create your own custom markup
+  # or override the default BBRuby translations (parameter is a hash of custom translations).
+  #
+  # The hash takes the following format: "name" => [regexp, replacement, description, example, enable_symbol]
+  #
+  #  custom_blockquote = {
+  #    'Quote' => [
+  #      /\[quote(:.*)?=(.*?)\](.*?)\[\/quote\1?\]/mi,
+  #      '<div class="quote"><p><cite>\2</cite></p><blockquote>\3</blockquote></div>',
+  #      'Quote with citation',
+  #      '[quote=mike]please quote me[/quote]',
+  #      :quote
+  #    ]
+  #  }
+  #
+  #  output = text.bbcode_to_html(custom_blockquote)
+  #
+  # === Enable and Disable specific tags
+  #
+  # BBRuby will allow you to only enable certain BBCode tags, or to explicitly disable certain tags.
+  # Pass in either :disable or :enable to set your method, followed by the comma-separated list of tags
+  # you wish to disable or enable
+  #
+  #   output = text.bbcode_to_html({}, true, :enable, :image, :bold, :quote)
+  #   output = text.bbcode_to_html({}, true, :disable, :image, :video, :color)
+  #
+  # === HTML auto-escaping
+  #
+  # By default, BBRuby will auto-escape HTML.  You can prevent this by passing in false as the second
+  # parameter
+  #
+  #   output = text.bbcode_to_html({}, false)
   #
   def bbcode_to_html(tags_alternative_definition = {}, escape_html=true, method=:disable, *tags)
     BBRuby.to_html(self, tags_alternative_definition, escape_html, method, tags)
   end
 
-  #
+  # Replace the string contents with the HTML-converted markup
   def bbcode_to_html!(tags_alternative_definition = {}, escape_html=true, method=:disable, *tags)
     self.replace(BBRuby.to_html(self, tags_alternative_definition, escape_html, method, tags))
   end
