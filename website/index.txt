@@ -1,0 +1,143 @@
+h1. BBRuby
+
+h2. What
+
+BBRuby is a "BBCode":http://www.bbcode.org implementation for Ruby. It will convert strings with BBCode markup to their HTML equivalent.
+
+h2. Installing
+
+To install as a gem:
+
+  <pre syntax="ruby">sudo gem install bb-ruby</pre>
+  
+To install as a plugin:
+  <pre syntax="ruby">script/plugin install git://github.com/cpjolicoeur/bb-ruby.git</pre>
+
+h2. Demonstration of usage
+
+BBRuby has been included directly into the String class for use on any string object:
+
+<pre syntax="ruby">
+require 'bb-ruby' # (only needed if installed as a gem)
+
+text = "[b]Here is some bold text[/b] followed by some [u]underlined text[/u]."
+output = text.bbcode_to_html
+text.bbcode_to_html! # (direct in-place conversion)
+</pre>
+
+BBRuby will auto-escape HTML tags, which can be prevented by passing false as the second param. BBRuby can also enable or disable certain tags based on input
+
+<pre syntax="ruby">output = text.bbcode_to_html({}, false)</pre>
+
+You can also choose to only allow certain BBCode tags to be processed.  The following will only process image, bold and quote tags.
+
+<pre syntax="ruby">output = text.bbcode_to_html({}, true, :enable, :image, :bold, :quote)</pre>
+
+You can also disable certain tags from being processed.
+
+<pre syntax="ruby">output = text.bbcode_to_html({}, true, :disable, :image, :bold, :quote)</pre>
+
+Alternately you can access BBRuby directly and not via a string:
+
+<pre syntax="ruby">output = BBRuby.to_html(bbcode_markup)</pre>
+
+BBRuby will also allow you to define your own custom BBCode markup translations or override the built-in translations to be more flexible with your application.  The first parameter is a hash that accepts your custom markup translations:
+
+<pre syntax="ruby">
+custom_blockquote = {
+  'Quote' => [
+    /\[quote(:.*)?=(.*?)\](.*?)\[\/quote\1?\]/mi,
+    '<div class="quote"><p><cite>\2</cite></p><blockquote>\3</blockquote></div>',
+    'Quote with citation',
+    '[quote=mike]please quote me[/quote]',
+    :quote
+  ],      
+}
+
+text.bbcode_to_html(custom_blockquote)
+</pre>
+
+h2. Tags Processed
+
+The following is the list of BBCode tags processed by BBRuby and their associated symbol for enabling/disabling them
+
+* [b]               :bold
+* [i]               :italics
+* [u]               :underline
+* [s]               :strikeout 
+* [del]             :delete
+* [ins]             :insert
+* [code]            :code
+* [size]            :size
+* [color]           :color
+* [ol]              :orderedlist
+* [ul]              :unorderedlist
+* [li]              :listitem    
+* [*]               :listitem
+* [list]            :listitem
+* [list=1]          :listitem
+* [list=a]          :listitem
+* [dl]              :definelist
+* [dt]              :defineterm
+* [dd]              :definition
+* [quote]           :quote
+* [quote=source]    :quote
+* [url=link]        :link
+* [url]             :link
+* [img size=]       :image
+* [img=]            :image
+* [img]             :image
+* [youtube]         :video  
+* [gvideo]          :video
+* [email]           :email
+
+
+h2. Forum
+
+"http://groups.google.com/group/bb-ruby":http://groups.google.com/group/bb-ruby
+
+h2. How to submit patches
+
+First read the "8 steps for fixing other people's code":http://drnicwilliams.com/2007/06/01/8-steps-for-fixing-other-peoples-code/
+
+Then fork your own copy of the repository on github, make your patch and then submit a pull request via github.
+
+* github: "http://github.com/cpjolicoeur/bb-ruby/tree/master":http://github.com/cpjolicoeur/bb-ruby/tree/master
+
+<pre>git clone git://github.com/cpjolicoeur/bb-ruby.git</pre>
+
+h3. Build and test instructions
+
+<pre>cd bb-ruby
+rake test
+rake install_gem</pre>
+
+h2. Documentation
+
+"http://bb-ruby.rubyforge.org/rdoc":http://bb-ruby.rubyforge.org/rdoc
+
+h2. License
+
+Copyright (c) 2008 Craig P Jolicoeur, Fernando Blat
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+h2. Contact
+
+Comments are welcome. Send an email to "Craig P Jolicoeur":mailto:cpjolicoeur+bbruby@gmail.com or email via the "Google Group":http://groups.google.com/group/bb-ruby
