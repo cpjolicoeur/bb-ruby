@@ -1,3 +1,8 @@
+== 0.8.4 2009-01-03
+
+* Added YouTube widescreen video support as this is the new YouTube default
+  * If you want to use the original 4:3 ratio embed format simply uncomment lines 180 and 187. Then comment out lines 181 and 188.
+
 == 0.8.3 2008-12-16
 
 * RDoc documentation updates
