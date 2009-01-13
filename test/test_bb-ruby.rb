@@ -208,4 +208,16 @@ class TestBBRuby < Test::Unit::TestCase
     assert_equal "<strong>bold</strong><em>italic</em><u>underline</u><fieldset><blockquote>quote</blockquote></fieldset><a href=\"foobar\">link</a>", "[b]bold[/b][i]italic[/i][u]underline[/u][quote]quote[/quote][url=foobar]link[/url]".bbcode_to_html({}, true, :enable, :bold, :italics, :underline, :link, :quote)
   end
 
+  def test_no_ending_tag
+    assert_equal "this [b]should not be bold", "this [b]should not be bold".bbcode_to_html 
+  end
+
+  def test_no_start_tag
+    assert_equal "this should not be bold[/b]", "this should not be bold[/b]".bbcode_to_html
+  end
+
+  def test_different_start_and_ending_tags
+    assert_equal "this [b]should not do formatting[/i]", "this [b]should not do formatting[/i]".bbcode_to_html
+  end
+
 end
