@@ -255,10 +255,10 @@ module BBRuby
       # parse bbcode tags
       case method
         when :enable
-          tags_definition.each_value { |t| text.gsub!(t[0], t[1]) if tags.include?(t[4]) }
+          tags_definition.each_value { |t| text.gsub!(t[0], t[1]) if tags[0].include?(t[4]) }
         when :disable
           # this works nicely because the default is disable and the default set of tags is [] (so none disabled) :)
-          tags_definition.each_value { |t| text.gsub!(t[0], t[1]) unless tags.include?(t[4]) }
+          tags_definition.each_value { |t| text.gsub!(t[0], t[1]) unless tags[0].include?(t[4]) }
       end
 
       # parse spacing

@@ -7,20 +7,20 @@ class TestBBRuby < Test::Unit::TestCase
   def test_strong
     assert_equal '<strong>simple</strong>', '[b]simple[/b]'.bbcode_to_html
     assert_equal '<strong>simple</strong>', '[b:7a9ca2c5c3]simple[/b:7a9ca2c5c3]'.bbcode_to_html
-    assert_equal "<strong>line 1<br />line 2</strong>", "[b:7a9ca2c5c3]line 1\nline 2[/b:7a9ca2c5c3]".bbcode_to_html
-    assert_equal '<strong>1. text 1:</strong> text 2<br /><strong>2. text 3</strong>', "[b:post_uid0]1. text 1:[/b:post_uid0] text 2\n[b:post_uid0]2. text 3[/b:post_uid0]".bbcode_to_html
+    assert_equal "<strong>line 1<br />\nline 2</strong>", "[b:7a9ca2c5c3]line 1\nline 2[/b:7a9ca2c5c3]".bbcode_to_html
+    assert_equal "<strong>1. text 1:</strong> text 2<br />\n<strong>2. text 3</strong>", "[b:post_uid0]1. text 1:[/b:post_uid0] text 2\n[b:post_uid0]2. text 3[/b:post_uid0]".bbcode_to_html
   end
   
   def test_em
     assert_equal '<em>simple</em>', '[i]simple[/i]'.bbcode_to_html
     assert_equal '<em>simple</em>', '[i:7a9ca2c5c3]simple[/i:7a9ca2c5c3]'.bbcode_to_html
-    assert_equal "<em>line 1<br />line 2</em>", "[i:7a9ca2c5c3]line 1\nline 2[/i:7a9ca2c5c3]".bbcode_to_html
+    assert_equal "<em>line 1<br />\nline 2</em>", "[i:7a9ca2c5c3]line 1\nline 2[/i:7a9ca2c5c3]".bbcode_to_html
   end
   
   def test_u
     assert_equal '<u>simple</u>', '[u]simple[/u]'.bbcode_to_html
     assert_equal '<u>simple</u>', '[u:7a9ca2c5c3]simple[/u:7a9ca2c5c3]'.bbcode_to_html
-    assert_equal "<u>line 1<br />line 2</u>", "[u:7a9ca2c5c3]line 1\nline 2[/u:7a9ca2c5c3]".bbcode_to_html
+    assert_equal "<u>line 1<br />\nline 2</u>", "[u:7a9ca2c5c3]line 1\nline 2[/u:7a9ca2c5c3]".bbcode_to_html
   end
   
   def test_del
@@ -38,7 +38,7 @@ class TestBBRuby < Test::Unit::TestCase
   def test_code
     assert_equal '<code>simple</code>', '[code]simple[/code]'.bbcode_to_html
     assert_equal '<code>simple</code>', '[code:7a9ca2c5c3]simple[/code:7a9ca2c5c3]'.bbcode_to_html
-    assert_equal "<code>var bxi = 0;<br />//Holds current speed of scrolling menu</code>", "[code:1:91cbdd72b7]var bxi = 0;\n//Holds current speed of scrolling menu[/code:1:91cbdd72b7]".bbcode_to_html
+    assert_equal "<code>var bxi = 0;<br />\n//Holds current speed of scrolling menu</code>", "[code:1:91cbdd72b7]var bxi = 0;\n//Holds current speed of scrolling menu[/code:1:91cbdd72b7]".bbcode_to_html
   end  
   
   def test_size
@@ -113,7 +113,7 @@ class TestBBRuby < Test::Unit::TestCase
     assert_equal '<a href="http://google.com">Google</a>', '[url=http://google.com]Google[/url]'.bbcode_to_html
     assert_equal '<a href="http://google.com">http://google.com</a>', '[url]http://google.com[/url]'.bbcode_to_html
     assert_equal '<a href="http://www.altctrlsupr.com/dmstk/kdd070803/00.html"> ABRIR ALBUM </a>','[URL=http://www.altctrlsupr.com/dmstk/kdd070803/00.html] ABRIR ALBUM [/URL]'.bbcode_to_html
-    assert_equal '<a href="http://www.altctrlsupr.com/dmstk/kdd070803/00.html"> ABRIR<br />ALBUM </a>',"[URL=http://www.altctrlsupr.com/dmstk/kdd070803/00.html] ABRIR\nALBUM [/URL]".bbcode_to_html
+    assert_equal %Q(<a href="http://www.altctrlsupr.com/dmstk/kdd070803/00.html"> ABRIR<br />\nALBUM </a>),"[URL=http://www.altctrlsupr.com/dmstk/kdd070803/00.html] ABRIR\nALBUM [/URL]".bbcode_to_html
     assert_equal '<a href="http://www.urimalet.com/cadaverex.mp3">aha</a>', "[URL=http://www.urimalet.com/cadaverex.mp3]aha[/URL]".bbcode_to_html
   end
   
