@@ -7,6 +7,7 @@ class TestBBRuby < Test::Unit::TestCase
   def test_strong
     assert_equal '<strong>simple</strong>', '[b]simple[/b]'.bbcode_to_html
     assert_equal '<strong>simple</strong>', '[b:7a9ca2c5c3]simple[/b:7a9ca2c5c3]'.bbcode_to_html
+    assert_equal %Q(<strong>simple</strong>), BBRuby.to_html( %Q([b:7a9ca2c5c3]simple[/b:7a9ca2c5c3]) )
     assert_equal "<strong>line 1<br />\nline 2</strong>", "[b:7a9ca2c5c3]line 1\nline 2[/b:7a9ca2c5c3]".bbcode_to_html
     assert_equal "<strong>1. text 1:</strong> text 2<br />\n<strong>2. text 3</strong>", "[b:post_uid0]1. text 1:[/b:post_uid0] text 2\n[b:post_uid0]2. text 3[/b:post_uid0]".bbcode_to_html
   end

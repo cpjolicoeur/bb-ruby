@@ -1,3 +1,8 @@
+== 0.9 2009-05-20
+
+* bugfix
+  * BBRuby.to_html was not working due to incorrect passing of splat params
+
 == 0.8.5 2009-05-20
 
 * bugfixes

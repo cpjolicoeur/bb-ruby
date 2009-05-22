@@ -2,7 +2,7 @@ $:.unshift(File.dirname(__FILE__)) unless
   $:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
 
 module BBRuby
-  VERSION = '0.8.5'
+  VERSION = '0.9'
 
   # allowable image formats
   @@imageformats = 'png|bmp|jpg|gif|jpeg'
@@ -240,10 +240,10 @@ module BBRuby
     #   BBRuby.to_html(text, {}, true, :enable, :image, :bold, :quote)
     #   BBRuby.to_html(text, {}, true, :disable, :image, :video, :color)
     #
-    def to_html(text, tags_alternative_definition = {}, escape_html=true, method=:disable, *tags)
+    def to_html(text, tags_alternative_definition={}, escape_html=true, method=:disable, *tags)
       text = text.clone
       
-      # escape < and > to remove any html
+      # escape "<, >, &" to remove any html
       if escape_html
         text.gsub!( '&', '&amp;' )
         text.gsub!( '<', '&lt;' )
@@ -254,11 +254,11 @@ module BBRuby
 
       # parse bbcode tags
       case method
-        when :enable
-          tags_definition.each_value { |t| text.gsub!(t[0], t[1]) if tags[0].include?(t[4]) }
-        when :disable
-          # this works nicely because the default is disable and the default set of tags is [] (so none disabled) :)
-          tags_definition.each_value { |t| text.gsub!(t[0], t[1]) unless tags[0].include?(t[4]) }
+      when :enable
+        tags_definition.each_value { |t| text.gsub!(t[0], t[1]) if tags.include?(t[4]) }
+      when :disable
+        # this works nicely because the default is disable and the default set of tags is [] (so none disabled) :)
+        tags_definition.each_value { |t| text.gsub!(t[0], t[1]) unless tags.include?(t[4]) }
       end
 
       # parse spacing
@@ -322,11 +322,11 @@ class String
   #   output = text.bbcode_to_html({}, false)
   #
   def bbcode_to_html(tags_alternative_definition = {}, escape_html=true, method=:disable, *tags)
-    BBRuby.to_html(self, tags_alternative_definition, escape_html, method, tags)
+    BBRuby.to_html(self, tags_alternative_definition, escape_html, method, *tags)
   end
 
   # Replace the string contents with the HTML-converted markup
   def bbcode_to_html!(tags_alternative_definition = {}, escape_html=true, method=:disable, *tags)
-    self.replace(BBRuby.to_html(self, tags_alternative_definition, escape_html, method, tags))
+    self.replace(BBRuby.to_html(self, tags_alternative_definition, escape_html, method, *tags))
   end
 end
