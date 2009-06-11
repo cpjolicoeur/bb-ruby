@@ -1,3 +1,7 @@
+== 0.9.2 2009-06-10
+
+* implement auto links
+
 == 0.9 2009-05-20
 
 * bugfix
