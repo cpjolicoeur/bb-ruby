@@ -107,7 +107,7 @@ class TestBBRuby < Test::Unit::TestCase
   
   def test_double_quote
    assert_equal '<fieldset><legend>Kitten</legend><blockquote><fieldset><legend>creatiu</legend><blockquote>f1</blockquote></fieldset>f2</blockquote></fieldset>',
-                '[quote:26fe26a6a9="Kitten"][quote:26fe26a6a9="creatiu"]f1[/quote:26fe26a6a9]f2[/quote:26fe26a6a9]'.bbcode_to_html.bbcode_to_html({}, false, :disable)
+                '[quote:26fe26a6a9="Kitten"][quote:26fe26a6a93="creatiu"]f1[/quote:26fe26a6a93]f2[/quote:26fe26a6a9]'.bbcode_to_html.bbcode_to_html({}, false, :disable)
   end
   
   def test_link
