@@ -141,6 +141,10 @@ class TestBBRuby < Test::Unit::TestCase
     assert_equal '<a href="mailto:wadus@wadus.com">wadus@wadus.com</a>', '[email]wadus@wadus.com[/email]'.bbcode_to_html
   end
 
+  def test_auto_link
+    assert_equal %Q(previous text <a href="http://www.google.com">http://www.google.com</a> post text), 'previous text http://www.google.com post text'.bbcode_to_html
+  end
+
   def test_html_escaping
     assert_equal "<strong>&lt;i&gt;foobar&lt;/i&gt;</strong>", '[b]<i>foobar</i>[/b]'.bbcode_to_html
     assert_equal "<strong><i>foobar</i></strong>", '[b]<i>foobar</i>[/b]'.bbcode_to_html({}, false)
@@ -169,7 +173,7 @@ class TestBBRuby < Test::Unit::TestCase
   end
 
   def test_self_tag_list
-    assert_equal 30, BBRuby.tag_list.size
+    assert_equal 31, BBRuby.tag_list.size
   end
   
   def test_redefinition_of_tag_html

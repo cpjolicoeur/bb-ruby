@@ -148,15 +148,12 @@ module BBRuby
       'Hyperlink (implied)',
       "Maybe try looking on [url]http://google.com[/url]",
       :link],
-    # 
-    # TODO: fix automatic links
-    #
-    # 'Link (Automatic)' => [
-    #   /http:\/\/(.*?)[^<\/a>]/,
-    #   '<a href="\1">\1</a>',
-    #   'Hyperlink (automatic)',
-    #   nil, nil,
-    #   :link],  
+    'Link (Automatic)' => [
+      /\s(https?:\/\/.*?(?=\s))/,
+      ' <a href="\1">\1</a>',
+      'Hyperlink (automatic)',
+      'Maybe try looking on http://www.google.com',
+      :link],  
     'Image (Resized)' => [
       /\[img(:.+)? size=(['"]?)(\d+)x(\d+)\2\](.*?)\[\/img\1?\]/im,
       '<img src="\5" style="width: \3px; height: \4px;" />',
