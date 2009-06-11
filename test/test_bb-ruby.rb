@@ -143,6 +143,10 @@ class TestBBRuby < Test::Unit::TestCase
 
   def test_auto_link
     assert_equal %Q(previous text <a href="http://www.google.com">http://www.google.com</a> post text), 'previous text http://www.google.com post text'.bbcode_to_html
+    assert_equal %Q( <a href="http://google.com">http://google.com</a> is my favorite search engine), 'http://google.com is my favorite search engine'.bbcode_to_html
+    assert_equal %Q(Try using google <a href="http://google.com">http://google.com</a>), 'Try using google http://google.com'.bbcode_to_html
+    assert_equal %Q(Try using googlehttp://google.com), 'Try using googlehttp://google.com'.bbcode_to_html
+    assert_equal %Q( <a href="http://google.com">http://google.com</a>), 'http://google.com'.bbcode_to_html
   end
 
   def test_html_escaping
