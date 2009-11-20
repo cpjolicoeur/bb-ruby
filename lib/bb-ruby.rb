@@ -186,6 +186,12 @@ module BBRuby
       'Display a video from YouTube.com (alternative format)', 
       '[youtube]http://youtube.com/watch/v/E4Fbk52Mk1w[/youtube]',
       :video],
+    'Vimeo' => [
+      /\[vimeo\](.*?)\/(\d+)\[\/vimeo\]/im,
+      '<object type="application/x-shockwave-flash" width="500" height="350" data="http://www.vimeo.com/moogaloop.swf?clip_id=\2"><param name="quality" value="best" /><param name="allowfullscreen" value="true" /><param name="scale" value="showAll" /><param name="movie" value="http://www.vimeo.com/moogaloop.swf?clip_id=\2" /></object>',
+      'Display a video from Vimeo', 
+      '[vimeo]http://www.vimeo.com/3485239[/vimeo]',
+      :video],
     'Google Video' => [
       /\[gvideo\](.*?)\?docid=([-]{0,1}\d+).*\[\/gvideo\]/mi,
       '<embed style="width:400px; height:326px;" id="VideoPlayback" type="application/x-shockwave-flash" src="http://video.google.com/googleplayer.swf?docId=\2" flashvars=""> </embed>',
