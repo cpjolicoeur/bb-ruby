@@ -1,3 +1,7 @@
+== 0.9.4 2009-11-20
+
+* added Vimeo video embed tag support
+
 == 0.9.3 2009-06-11
 
 * better auto link support
