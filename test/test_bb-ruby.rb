@@ -179,6 +179,16 @@ class TestBBRuby < Test::Unit::TestCase
     assert_equal "<strong>foobar</strong>", foo.bbcode_to_html!
     assert_equal "<strong>foobar</strong>", foo
   end
+  
+  def test_to_html_with_no_markup
+    foo = "first paragraph\n\nsecond paragraph\nwith a linebreak"
+    assert_equal "first paragraph<br />\n<br />\nsecond paragraph<br />\nwith a linebreak", foo.bbcode_to_html
+  end
+  
+  def test_to_html_with_formatting
+    foo = "first paragraph\n\nsecond paragraph\nwith a linebreak"
+    assert_equal %Q(<p>first paragraph</p>\n\n<p>second paragraph\n<br />with a linebreak</p>), foo.bbcode_to_html_with_formatting
+  end
 
   def test_self_tag_list
     assert_equal 32, BBRuby.tag_list.size

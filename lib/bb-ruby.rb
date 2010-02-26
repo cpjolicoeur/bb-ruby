@@ -244,7 +244,38 @@ module BBRuby
     #   BBRuby.to_html(text, {}, true, :disable, :image, :video, :color)
     #
     def to_html(text, tags_alternative_definition={}, escape_html=true, method=:disable, *tags)
-      text = text.clone
+      text = process_tags(text, tags_alternative_definition, escape_html, method, *tags)
+      
+      # parse spacing
+      text.gsub!( /\r\n?/, "\n" )
+      text.gsub!( /\n/, "<br />\n" )
+
+      # return markup
+      text
+    end
+    
+    # The same as BBRuby.to_html except the output is passed through simple_format first
+    #
+    # Returns text transformed into HTML using simple formatting rules. Two or more consecutive newlines(\n\n) 
+    # are considered as a paragraph and wrapped in <p> tags. One newline (\n) is considered as a linebreak and 
+    # a <br /> tag is appended. This method does not remove the newlines from the text.
+    #
+    def to_html_with_formatting(text, tags_alternative_definition={}, escape_html=true, method=:disable, *tags)
+      text = process_tags(text, tags_alternative_definition, escape_html, method, *tags)
+      
+      # parse spacing
+      simple_format( text )
+    end
+
+    # Returns the list of tags processed by BBRuby in a Hash object
+    def tag_list
+      @@tags
+    end
+    
+    private
+    
+    def process_tags(text, tags_alternative_definition={}, escape_html=true, method=:disable, *tags)
+      text = text.dup
       
       # escape "<, >, &" to remove any html
       if escape_html
@@ -263,18 +294,19 @@ module BBRuby
         # this works nicely because the default is disable and the default set of tags is [] (so none disabled) :)
         tags_definition.each_value { |t| text.gsub!(t[0], t[1]) unless tags.include?(t[4]) }
       end
-
-      # parse spacing
-      text.gsub!( /\r\n?/, "\n" )
-      text.gsub!( /\n/, "<br />\n" )
-
-      # return markup
+      
       text
     end
-
-    # Returns the list of tags processed by BBRuby in a Hash object
-    def tag_list
-      @@tags
+    
+    # extracted from Rails ActionPack
+    def simple_format( text )
+      start_tag = '<p>'
+      text = text.to_s.dup
+      text.gsub!(/\r\n?/, "\n")                     # \r\n and \r => \n
+      text.gsub!(/\n\n+/, "</p>\n\n#{start_tag}")  # 2+ newline  => paragraph
+      text.gsub!(/([^\n]\n)(?=[^\n])/, '\1<br />')  # 1 newline   => br
+      text.insert 0, start_tag
+      text << "</p>"
     end
   end # class << self
 
@@ -331,5 +363,14 @@ class String
   # Replace the string contents with the HTML-converted markup
   def bbcode_to_html!(tags_alternative_definition = {}, escape_html=true, method=:disable, *tags)
     self.replace(BBRuby.to_html(self, tags_alternative_definition, escape_html, method, *tags))
+  end
+
+  def bbcode_to_html_with_formatting(tags_alternative_definition = {}, escape_html=true, method=:disable, *tags)
+    BBRuby.to_html_with_formatting(self, tags_alternative_definition, escape_html, method, *tags)
+  end
+
+  # Replace the string contents with the HTML-converted markup using simple_format
+  def bbcode_to_html_with_formatting!(tags_alternative_definition = {}, escape_html=true, method=:disable, *tags)
+    self.replace(BBRuby.to_html_with_formatting(self, tags_alternative_definition, escape_html, method, *tags))
   end
 end
