@@ -1,3 +1,7 @@
+== 0.9.5 2010-02-26
+
+* added to_html_with_formatting(!) methods
+
 == 0.9.4 2009-11-20
 
 * added Vimeo video embed tag support

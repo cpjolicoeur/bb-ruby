@@ -55,6 +55,12 @@ Define your own translation, in order to be more flexible:
     }
  
     text.bbcode_to_html(my_blockquote)
+    
+You can also use the simple_format method of ActionPack by using the *_with_formatting methods:
+
+  output = text.bbcode_to_html_with_formatting
+  output = text.bbcode_to_html_with_formatting!
+
 
 == TAGS PROCESSED:
 
