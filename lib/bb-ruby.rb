@@ -125,7 +125,7 @@ module BBRuby
       '[dd]my definition[/dd',
       :definition],
     'Quote' => [
-      /\[quote(:.*)?="?(.*?)"?\](.*?)\[\/quote\1?\]/mi,
+      /\[quote(:.*)?=(?:&quot;)?(.*?)(?:&quot;)?\](.*?)\[\/quote\1?\]/mi,
       '<fieldset><legend>\2</legend><blockquote>\3</blockquote></fieldset>',
       'Quote with citation',
       "[quote=mike]Now is the time...[/quote]",
@@ -277,11 +277,13 @@ module BBRuby
     def process_tags(text, tags_alternative_definition={}, escape_html=true, method=:disable, *tags)
       text = text.dup
       
-      # escape "<, >, &" to remove any html
+      # escape "<, >, &" and quotes to remove any html
       if escape_html
         text.gsub!( '&', '&amp;' )
         text.gsub!( '<', '&lt;' )
         text.gsub!( '>', '&gt;' )
+        text.gsub!( '"', '&quot;' )
+        text.gsub!( "'", '&apos;' )
       end
       
       tags_definition = @@tags.merge(tags_alternative_definition)
