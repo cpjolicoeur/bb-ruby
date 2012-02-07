@@ -44,10 +44,14 @@ class TestBBRuby < Test::Unit::TestCase
   
   def test_size
     assert_equal '<span style="font-size: 32px;">12px Text</span>', '[size=32]12px Text[/size]'.bbcode_to_html
+    assert_equal '<span style="font-size: 32px;">12px Text</span>', '[size="32"]12px Text[/size]'.bbcode_to_html
+    assert_equal '<span style="font-size: 32px;">12px Text</span>', '[size=\'32\']12px Text[/size]'.bbcode_to_html
   end
   
   def test_color
     assert_equal '<span style="color: red;">Red Text</span>', '[color=red]Red Text[/color]'.bbcode_to_html
+    assert_equal '<span style="color: red;">Red Text</span>', '[color="red"]Red Text[/color]'.bbcode_to_html
+    assert_equal '<span style="color: red;">Red Text</span>', '[color=\'red\']Red Text[/color]'.bbcode_to_html
     assert_equal '<span style="color: #ff0023;">Hex Color Text</span>', '[color=#ff0023]Hex Color Text[/color]'.bbcode_to_html
     assert_equal '<span style="color: #B23803;">text</span>', '[color=#B23803:05d7c56429]text[/color:05d7c56429]'.bbcode_to_html
   end
@@ -124,6 +128,8 @@ class TestBBRuby < Test::Unit::TestCase
     assert_equal '<img src="http://zoople/hochzeit.png" style="width: 95px; height: 96px;" />', '[img size=95x96]http://zoople/hochzeit.png[/img]'.bbcode_to_html
     assert_equal '<img src="http://zoople/hochzeit.png" alt="" />', '[img:7a9ca2c5c3]http://zoople/hochzeit.png[/img:7a9ca2c5c3]'.bbcode_to_html
     assert_equal '<img src="http://zoople/hochzeit.png" style="width: 95px; height: 96px;" />', '[img:7a9ca2c5c3 size=95x96]http://zoople/hochzeit.png[/img:7a9ca2c5c3]'.bbcode_to_html
+    assert_equal '<img src="http://zoople/hochzeit.png" style="width: 95px; height: 96px;" />', '[img:7a9ca2c5c3 size="95x96"]http://zoople/hochzeit.png[/img:7a9ca2c5c3]'.bbcode_to_html
+    assert_equal '<img src="http://zoople/hochzeit.png" style="width: 95px; height: 96px;" />', '[img:7a9ca2c5c3 size=\'95x96\']http://zoople/hochzeit.png[/img:7a9ca2c5c3]'.bbcode_to_html
     assert_equal '<img src="http://www.marcodigital.com/sitanddie/sitanddiepequeÃ±o.jpg" alt="" />', '[img:post_uid0]http://www.marcodigital.com/sitanddie/sitanddiepequeÃ±o.jpg[/img:post_uid0]'.bbcode_to_html
   end
   

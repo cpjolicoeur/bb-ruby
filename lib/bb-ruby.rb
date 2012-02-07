@@ -6,6 +6,7 @@ module BBRuby
 
   # allowable image formats
   @@imageformats = 'png|bmp|jpg|gif|jpeg'
+  @@quote_matcher = '(&quot;|&apos;|)'
 
   # built-in BBCode tabs that will be processed
   @@tags = {
@@ -53,14 +54,14 @@ module BBRuby
       '[code]some code[/code]',
       :code],
     'Size' => [
-      /\[size=['"]?(.*?)['"]?\](.*?)\[\/size\]/im,
-      '<span style="font-size: \1px;">\2</span>',
+      /\[size=#{@@quote_matcher}(.*?)\1\](.*?)\[\/size\]/im,
+      '<span style="font-size: \2px;">\3</span>',
       'Change text size',
       '[size=20]Here is some larger text[/size]',
       :size],
     'Color' => [
-      /\[color=['"]?(\w+|\#\w{6})['"]?(:.+)?\](.*?)\[\/color\2?\]/im,
-      '<span style="color: \1;">\3</span>',
+      /\[color=#{@@quote_matcher}(\w+|\#\w{6})\1(:.+)?\](.*?)\[\/color\3?\]/im,
+      '<span style="color: \2;">\4</span>',
       'Change text color',
       '[color=red]This is red text[/color]',
       :color],
@@ -155,7 +156,7 @@ module BBRuby
       'Maybe try looking on http://www.google.com',
       :link],  
     'Image (Resized)' => [
-      /\[img(:.+)? size=(['"]?)(\d+)x(\d+)\2\](.*?)\[\/img\1?\]/im,
+      /\[img(:.+)? size=#{@@quote_matcher}(\d+)x(\d+)\2\](.*?)\[\/img\1?\]/im,
       '<img src="\5" style="width: \3px; height: \4px;" />',
       'Display an image with a set width and height', 
       '[img size=96x96]http://www.google.com/intl/en_ALL/images/logo.gif[/img]',
