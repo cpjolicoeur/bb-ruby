@@ -44,10 +44,14 @@ class TestBBRuby < Test::Unit::TestCase
   
   def test_size
     assert_equal '<span style="font-size: 32px;">12px Text</span>', '[size=32]12px Text[/size]'.bbcode_to_html
+    assert_equal '<span style="font-size: 32px;">12px Text</span>', '[size="32"]12px Text[/size]'.bbcode_to_html
+    assert_equal '<span style="font-size: 32px;">12px Text</span>', '[size=\'32\']12px Text[/size]'.bbcode_to_html
   end
   
   def test_color
     assert_equal '<span style="color: red;">Red Text</span>', '[color=red]Red Text[/color]'.bbcode_to_html
+    assert_equal '<span style="color: red;">Red Text</span>', '[color="red"]Red Text[/color]'.bbcode_to_html
+    assert_equal '<span style="color: red;">Red Text</span>', '[color=\'red\']Red Text[/color]'.bbcode_to_html
     assert_equal '<span style="color: #ff0023;">Hex Color Text</span>', '[color=#ff0023]Hex Color Text[/color]'.bbcode_to_html
     assert_equal '<span style="color: #B23803;">text</span>', '[color=#B23803:05d7c56429]text[/color:05d7c56429]'.bbcode_to_html
   end
@@ -99,8 +103,8 @@ class TestBBRuby < Test::Unit::TestCase
   def test_quote
     assert_equal '<fieldset><blockquote>quoting</blockquote></fieldset>', '[quote]quoting[/quote]'.bbcode_to_html
     assert_equal '<fieldset><blockquote>quoting</blockquote></fieldset>', '[quote]quoting[/quote]'.bbcode_to_html.bbcode_to_html({}, false, :disable)
-    assert_equal '<fieldset><legend>black</legend><blockquote>si el niño hubiera sido de "penalty" le hubieran llamado <strong>system Error</strong>!!! :)</blockquote></fieldset>', "[quote:7a9ca2c5c3=\"black\"]si el niño hubiera sido de \"penalty\" le hubieran llamado [b:7a9ca2c5c3]system Error[/b:7a9ca2c5c3]!!! :)[/quote:7a9ca2c5c3]".bbcode_to_html
-    assert_equal '<fieldset><legend>black</legend><blockquote>si el niño hubiera sido de "penalty" le hubieran llamado <strong>system Error</strong>!!! :)</blockquote></fieldset>', "[quote:7a9ca2c5c3=\"black\"]si el niño hubiera sido de \"penalty\" le hubieran llamado [b:7a9ca2c5c3]system Error[/b:7a9ca2c5c3]!!! :)[/quote:7a9ca2c5c3]".bbcode_to_html.bbcode_to_html({}, false, :disable)
+    assert_equal '<fieldset><legend>black</legend><blockquote>si el niño hubiera sido de &quot;penalty&quot; le hubieran llamado <strong>system Error</strong>!!! :)</blockquote></fieldset>', "[quote:7a9ca2c5c3=\"black\"]si el niño hubiera sido de \"penalty\" le hubieran llamado [b:7a9ca2c5c3]system Error[/b:7a9ca2c5c3]!!! :)[/quote:7a9ca2c5c3]".bbcode_to_html
+    assert_equal '<fieldset><legend>black</legend><blockquote>si el niño hubiera sido de &quot;penalty&quot; le hubieran llamado <strong>system Error</strong>!!! :)</blockquote></fieldset>', "[quote:7a9ca2c5c3=\"black\"]si el niño hubiera sido de \"penalty\" le hubieran llamado [b:7a9ca2c5c3]system Error[/b:7a9ca2c5c3]!!! :)[/quote:7a9ca2c5c3]".bbcode_to_html.bbcode_to_html({}, false, :disable)
     assert_equal '<fieldset><legend>Who</legend><blockquote>said that</blockquote></fieldset>', '[quote=Who]said that[/quote]'.bbcode_to_html
     assert_equal '<fieldset><legend>Who</legend><blockquote>said that</blockquote></fieldset>', '[quote=Who]said that[/quote]'.bbcode_to_html.bbcode_to_html({}, false, :disable)
   end
@@ -124,6 +128,8 @@ class TestBBRuby < Test::Unit::TestCase
     assert_equal '<img src="http://zoople/hochzeit.png" style="width: 95px; height: 96px;" />', '[img size=95x96]http://zoople/hochzeit.png[/img]'.bbcode_to_html
     assert_equal '<img src="http://zoople/hochzeit.png" alt="" />', '[img:7a9ca2c5c3]http://zoople/hochzeit.png[/img:7a9ca2c5c3]'.bbcode_to_html
     assert_equal '<img src="http://zoople/hochzeit.png" style="width: 95px; height: 96px;" />', '[img:7a9ca2c5c3 size=95x96]http://zoople/hochzeit.png[/img:7a9ca2c5c3]'.bbcode_to_html
+    assert_equal '<img src="http://zoople/hochzeit.png" style="width: 95px; height: 96px;" />', '[img:7a9ca2c5c3 size="95x96"]http://zoople/hochzeit.png[/img:7a9ca2c5c3]'.bbcode_to_html
+    assert_equal '<img src="http://zoople/hochzeit.png" style="width: 95px; height: 96px;" />', '[img:7a9ca2c5c3 size=\'95x96\']http://zoople/hochzeit.png[/img:7a9ca2c5c3]'.bbcode_to_html
     assert_equal '<img src="http://www.marcodigital.com/sitanddie/sitanddiepequeÃ±o.jpg" alt="" />', '[img:post_uid0]http://www.marcodigital.com/sitanddie/sitanddiepequeÃ±o.jpg[/img:post_uid0]'.bbcode_to_html
   end
   
@@ -160,6 +166,8 @@ class TestBBRuby < Test::Unit::TestCase
     assert_equal "1 is < 2", '1 is < 2'.bbcode_to_html({}, false)
     assert_equal "2 is &gt; 1", '2 is > 1'.bbcode_to_html
     assert_equal "2 is > 1", '2 is > 1'.bbcode_to_html({}, false)
+    assert_equal %Q{&quot;double quotes&quot; and &apos;single quotes&apos;}, %Q{"double quotes" and 'single quotes'}.bbcode_to_html
+    assert_equal %Q{"double quotes" and 'single quotes'}, %Q{"double quotes" and 'single quotes'}.bbcode_to_html({}, false)
   end
 
   def test_disable_tags
@@ -197,7 +205,7 @@ class TestBBRuby < Test::Unit::TestCase
   def test_redefinition_of_tag_html
     mydef = {
       'Quote' => [
-        /\[quote(:.*)?="?(.*?)"?\](.*?)\[\/quote\1?\]/mi,
+        /\[quote(:.*)?=(?:&quot;)?(.*?)(?:&quot;)?\](.*?)\[\/quote\1?\]/mi,
         '<div class="quote"><p><cite>\2</cite></p><blockquote>\3</blockquote></div>',
         'Quote with citation',
         nil, nil,
