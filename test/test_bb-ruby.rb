@@ -1,4 +1,5 @@
 #! /usr/bin/env ruby
+#coding: utf-8
 
 require File.dirname(__FILE__) + '/test_helper.rb'
 
@@ -68,6 +69,8 @@ class TestBBRuby < Test::Unit::TestCase
   
   def test_list_unordered
     assert_equal '<ul><li>item 1</li><li>item 2</li></ul>', '[list][li]item 1[/li][li]item 2[/li][/list]'.bbcode_to_html
+    #Added this test which raising an error because of the "list" word in list items. 
+    assert_equal '<ul><li>list item 1</li><li>list item 2</li></ul>', '[list][li]list item 1[/li][li]list item 2[/li][/list]'.bbcode_to_html
     assert_equal '<ul><li>item 1</li><li>item 2</li></ul>', '[list:7a9ca2c5c3][li]item 1[/li][li]item 2[/li][/list:o:7a9ca2c5c3]'.bbcode_to_html
     assert_equal '<ul><li>item 1</li><li>item 2</li></ul><ul><li>item 3</li><li>item 4</li></ul>', 
                  '[list:7a9ca2c5c3][li]item 1[/li][li]item 2[/li][/list:o:7a9ca2c5c3][list:7a9ca2c5c3][li]item 3[/li][li]item 4[/li][/list:o:7a9ca2c5c3]'.bbcode_to_html

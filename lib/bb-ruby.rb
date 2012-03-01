@@ -90,7 +90,7 @@ module BBRuby
       '[*]list item',
       :listitem],
     'Unordered list (alternative)' => [
-      /\[list(:.*)?\]((?:(?!list).)*)\[\/list(:.)?\1?\]/mi,
+      /\[list(:.*)?\]((?:(?!\[list(:.*)?\]).)*)\[\/list(:.)?\1?\]/mi,
       '<ul>\2</ul>',
       'Unordered list item',
       '[list][*]item 1[*] item2[/list]',
