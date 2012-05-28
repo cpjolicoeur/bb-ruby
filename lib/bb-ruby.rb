@@ -1,9 +1,6 @@
-$:.unshift(File.dirname(__FILE__)) unless
-  $:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
+require "bb-ruby/version"
 
 module BBRuby
-  VERSION = '0.9.5'
-
   # allowable image formats
   @@imageformats = 'png|bmp|jpg|gif|jpeg'
   @@quote_matcher = '(&quot;|&apos;|)'
@@ -154,17 +151,17 @@ module BBRuby
       ' <a href="\2">\2</a>',
       'Hyperlink (automatic)',
       'Maybe try looking on http://www.google.com',
-      :link],  
+      :link],
     'Image (Resized)' => [
       /\[img(:.+)? size=#{@@quote_matcher}(\d+)x(\d+)\2\](.*?)\[\/img\1?\]/im,
       '<img src="\5" style="width: \3px; height: \4px;" />',
-      'Display an image with a set width and height', 
+      'Display an image with a set width and height',
       '[img size=96x96]http://www.google.com/intl/en_ALL/images/logo.gif[/img]',
       :image],
     'Image (Alternative)' => [
       /\[img=([^\[\]].*?)\.(#{@@imageformats})\]/im,
       '<img src="\1.\2" alt="" />',
-      'Display an image (alternative format)', 
+      'Display an image (alternative format)',
       '[img=http://myimage.com/logo.gif]',
       :image],
     'Image' => [
@@ -172,31 +169,31 @@ module BBRuby
       '<img src="\2.\3" alt="" />',
       'Display an image',
       'Check out this crazy cat: [img]http://catsweekly.com/crazycat.jpg[/img]',
-      :image],   
+      :image],
     'YouTube' => [
       /\[youtube\](.*?)\?v=([\w\d\-]+).*\[\/youtube\]/im,
       # '<object width="400" height="330"><param name="movie" value="http://www.youtube.com/v/\2"></param><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/\2" type="application/x-shockwave-flash" wmode="transparent" width="400" height="330"></embed></object>',
       '<object width="320" height="265"><param name="movie" value="http://www.youtube.com/v/\2"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/\2" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="320" height="265"></embed></object>',
-      'Display a video from YouTube.com', 
+      'Display a video from YouTube.com',
       '[youtube]http://youtube.com/watch?v=E4Fbk52Mk1w[/youtube]',
       :video],
     'YouTube (Alternative)' => [
       /\[youtube\](.*?)\/v\/([\w\d\-]+)\[\/youtube\]/im,
       # '<object width="400" height="330"><param name="movie" value="http://www.youtube.com/v/\2"></param><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/\2" type="application/x-shockwave-flash" wmode="transparent" width="400" height="330"></embed></object>',
       '<object width="320" height="265"><param name="movie" value="http://www.youtube.com/v/\2"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/\2" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="320" height="265"></embed></object>',
-      'Display a video from YouTube.com (alternative format)', 
+      'Display a video from YouTube.com (alternative format)',
       '[youtube]http://youtube.com/watch/v/E4Fbk52Mk1w[/youtube]',
       :video],
     'Vimeo' => [
       /\[vimeo\](.*?)\/(\d+)\[\/vimeo\]/im,
       '<object type="application/x-shockwave-flash" width="500" height="350" data="http://www.vimeo.com/moogaloop.swf?clip_id=\2"><param name="quality" value="best" /><param name="allowfullscreen" value="true" /><param name="scale" value="showAll" /><param name="movie" value="http://www.vimeo.com/moogaloop.swf?clip_id=\2" /></object>',
-      'Display a video from Vimeo', 
+      'Display a video from Vimeo',
       '[vimeo]http://www.vimeo.com/3485239[/vimeo]',
       :video],
     'Google Video' => [
       /\[gvideo\](.*?)\?docid=([-]{0,1}\d+).*\[\/gvideo\]/mi,
       '<embed style="width:400px; height:326px;" id="VideoPlayback" type="application/x-shockwave-flash" src="http://video.google.com/googleplayer.swf?docId=\2" flashvars=""> </embed>',
-      'Display a video from Google Video', 
+      'Display a video from Google Video',
       '[gvideo]http://video.google.com/videoplay?docid=-2200109535941088987[/gvideo]',
       :video],
     'Email' => [
@@ -246,7 +243,7 @@ module BBRuby
     #
     def to_html(text, tags_alternative_definition={}, escape_html=true, method=:disable, *tags)
       text = process_tags(text, tags_alternative_definition, escape_html, method, *tags)
-      
+
       # parse spacing
       text.gsub!( /\r\n?/, "\n" )
       text.gsub!( /\n/, "<br />\n" )
@@ -254,16 +251,16 @@ module BBRuby
       # return markup
       text
     end
-    
+
     # The same as BBRuby.to_html except the output is passed through simple_format first
     #
-    # Returns text transformed into HTML using simple formatting rules. Two or more consecutive newlines(\n\n) 
-    # are considered as a paragraph and wrapped in <p> tags. One newline (\n) is considered as a linebreak and 
+    # Returns text transformed into HTML using simple formatting rules. Two or more consecutive newlines(\n\n)
+    # are considered as a paragraph and wrapped in <p> tags. One newline (\n) is considered as a linebreak and
     # a <br /> tag is appended. This method does not remove the newlines from the text.
     #
     def to_html_with_formatting(text, tags_alternative_definition={}, escape_html=true, method=:disable, *tags)
       text = process_tags(text, tags_alternative_definition, escape_html, method, *tags)
-      
+
       # parse spacing
       simple_format( text )
     end
@@ -272,12 +269,12 @@ module BBRuby
     def tag_list
       @@tags
     end
-    
+
     private
-    
+
     def process_tags(text, tags_alternative_definition={}, escape_html=true, method=:disable, *tags)
       text = text.dup
-      
+
       # escape "<, >, &" and quotes to remove any html
       if escape_html
         text.gsub!( '&', '&amp;' )
@@ -286,7 +283,7 @@ module BBRuby
         text.gsub!( '"', '&quot;' )
         text.gsub!( "'", '&apos;' )
       end
-      
+
       tags_definition = @@tags.merge(tags_alternative_definition)
 
       # parse bbcode tags
@@ -297,10 +294,10 @@ module BBRuby
         # this works nicely because the default is disable and the default set of tags is [] (so none disabled) :)
         tags_definition.each_value { |t| text.gsub!(t[0], t[1]) unless tags.include?(t[4]) }
       end
-      
+
       text
     end
-    
+
     # extracted from Rails ActionPack
     def simple_format( text )
       start_tag = '<p>'
@@ -313,7 +310,8 @@ module BBRuby
     end
   end # class << self
 
-end # class BBRuby
+end
+
 
 class String
   # Convert a string with BBCode markup into its corresponding HTML markup
