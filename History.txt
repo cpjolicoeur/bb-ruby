@@ -1,6 +1,7 @@
 == 0.9.6 2012-08-17
 
 * added align tag for floating images and other things
+* fixed nested quotes
 
 == 0.9.5 2010-02-26
 
