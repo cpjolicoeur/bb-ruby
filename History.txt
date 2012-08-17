@@ -1,3 +1,7 @@
+== 0.9.6 2012-08-17
+
+* added align tag for floating images and other things
+
 == 0.9.5 2010-02-26
 
 * added to_html_with_formatting(!) methods

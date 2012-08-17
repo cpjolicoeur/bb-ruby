@@ -2,7 +2,7 @@ $:.unshift(File.dirname(__FILE__)) unless
   $:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
 
 module BBRuby
-  VERSION = '0.9.5'
+  VERSION = '0.9.6'
 
   # allowable image formats
   @@imageformats = 'png|bmp|jpg|gif|jpeg'
@@ -204,7 +204,13 @@ module BBRuby
       '<a href="mailto:\2">\2</a>',
       'Link to email address',
       '[email]wadus@wadus.com[/email]',
-      :email]
+      :email],
+    'Align' => [
+      /\[align=(.*?)\](.*?)\[\/align\]/mi,
+      "<span class=\"bb-ruby_align_\\1\" style=\"float:\\1;\">\\2</span>",
+      'Align this object using float',
+      'Here\'s a wrapped image: [align=right][img]image.png[/img][/align]',
+      :align]
   }
 
   class << self
