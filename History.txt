@@ -1,3 +1,13 @@
+== 0.9.7 2012-08-20
+* merged with marcandre's fork:
+* Simplify dev setup using bundler
+* Allow quotes in URL
+
+== 0.9.6 2012-08-17
+
+* added align tag for floating images and other things
+* fixed nested quotes
+
 == 0.9.5 2010-02-26
 
 * added to_html_with_formatting(!) methods
