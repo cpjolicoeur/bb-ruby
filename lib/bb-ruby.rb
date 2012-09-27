@@ -22,7 +22,7 @@ module BBRuby
       :italics],
     'Underline' => [
       /\[u(:.+)?\](.*?)\[\/u\1?\]/mi,
-      '<u>\2</u>',
+      '<span style="text-decoration:underline;">\2</span>',
       'Underline',
       'Use it for [u]important[/u] things or something',
       :underline],

@@ -1,0 +1,14 @@
+PATH
+  remote: .
+  specs:
+    bb-ruby (0.9.7)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  bb-ruby!

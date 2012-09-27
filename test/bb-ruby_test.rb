@@ -20,9 +20,9 @@ class TestBBRuby < Test::Unit::TestCase
   end
 
   def test_u
-    assert_equal '<u>simple</u>', '[u]simple[/u]'.bbcode_to_html
-    assert_equal '<u>simple</u>', '[u:7a9ca2c5c3]simple[/u:7a9ca2c5c3]'.bbcode_to_html
-    assert_equal "<u>line 1<br />\nline 2</u>", "[u:7a9ca2c5c3]line 1\nline 2[/u:7a9ca2c5c3]".bbcode_to_html
+    assert_equal '<span style="text-decoration:underline;">simple</span>', '[u]simple[/u]'.bbcode_to_html
+    assert_equal '<span style="text-decoration:underline;">simple</span>', '[u:7a9ca2c5c3]simple[/u:7a9ca2c5c3]'.bbcode_to_html
+    assert_equal '<span style="text-decoration:underline;">line 1<br />\nline 2</span>', "[u:7a9ca2c5c3]line 1\nline 2[/u:7a9ca2c5c3]".bbcode_to_html
   end
 
   def test_del
@@ -240,8 +240,8 @@ class TestBBRuby < Test::Unit::TestCase
   end
 
   def test_multiple_tag_test
-    assert_equal "<strong>bold</strong><em>italic</em><u>underline</u><fieldset><blockquote>quote</blockquote></fieldset><a href=\"foobar\">link</a>", "[b]bold[/b][i]italic[/i][u]underline[/u][quote]quote[/quote][url=foobar]link[/url]".bbcode_to_html
-    assert_equal "<strong>bold</strong><em>italic</em><u>underline</u><fieldset><blockquote>quote</blockquote></fieldset><a href=\"foobar\">link</a>", "[b]bold[/b][i]italic[/i][u]underline[/u][quote]quote[/quote][url=foobar]link[/url]".bbcode_to_html({}, true, :enable, :bold, :italics, :underline, :link, :quote)
+    assert_equal "<strong>bold</strong><em>italic</em><span style=\"text-decoration:underline;\">underline</span><fieldset><blockquote>quote</blockquote></fieldset><a href=\"foobar\">link</a>", "[b]bold[/b][i]italic[/i][u]underline[/u][quote]quote[/quote][url=foobar]link[/url]".bbcode_to_html
+    assert_equal "<strong>bold</strong><em>italic</em><span style=\"text-decoration:underline;\">underline</span><fieldset><blockquote>quote</blockquote></fieldset><a href=\"foobar\">link</a>", "[b]bold[/b][i]italic[/i][u]underline[/u][quote]quote[/quote][url=foobar]link[/url]".bbcode_to_html({}, true, :enable, :bold, :italics, :underline, :link, :quote)
   end
 
   def test_no_ending_tag
