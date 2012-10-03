@@ -1,4 +1,11 @@
+== 0.9.8 2012-10-03
+
+* replace deprecated html <u> tag
+* added align tag for floating images
+* fixed nested quotes
+
 == 0.9.7 2012-08-20
+
 * merged with marcandre's fork:
 * Simplify dev setup using bundler
 * Allow quotes in URL
