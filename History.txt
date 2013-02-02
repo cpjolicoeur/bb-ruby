@@ -1,3 +1,7 @@
+== 0.9.9 2013-02-2
+
+* Dont insert any extra html tags if just using .to_html method
+
 == 0.9.8 2012-10-03
 
 * replace deprecated html <u> tag
@@ -54,4 +58,4 @@
 
 * No major enhancements:
   * Small point release for moving gem from Github to RubyForge
-  * Gem is no longer served from github via cpjolicoeur-bbruby.  Gem is now served directly from Rubyforge via bb-ruby 
+  * Gem is no longer served from github via cpjolicoeur-bbruby.  Gem is now served directly from Rubyforge via bb-ruby

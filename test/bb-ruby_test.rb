@@ -9,20 +9,20 @@ class TestBBRuby < Test::Unit::TestCase
     assert_equal '<strong>simple</strong>', '[b]simple[/b]'.bbcode_to_html
     assert_equal '<strong>simple</strong>', '[b:7a9ca2c5c3]simple[/b:7a9ca2c5c3]'.bbcode_to_html
     assert_equal %Q(<strong>simple</strong>), BBRuby.to_html( %Q([b:7a9ca2c5c3]simple[/b:7a9ca2c5c3]) )
-    assert_equal "<strong>line 1<br />\nline 2</strong>", "[b:7a9ca2c5c3]line 1\nline 2[/b:7a9ca2c5c3]".bbcode_to_html
-    assert_equal "<strong>1. text 1:</strong> text 2<br />\n<strong>2. text 3</strong>", "[b:post_uid0]1. text 1:[/b:post_uid0] text 2\n[b:post_uid0]2. text 3[/b:post_uid0]".bbcode_to_html
+    assert_equal "<strong>line 1\nline 2</strong>", "[b:7a9ca2c5c3]line 1\nline 2[/b:7a9ca2c5c3]".bbcode_to_html
+    assert_equal "<strong>1. text 1:</strong> text 2\n<strong>2. text 3</strong>", "[b:post_uid0]1. text 1:[/b:post_uid0] text 2\n[b:post_uid0]2. text 3[/b:post_uid0]".bbcode_to_html
   end
 
   def test_em
     assert_equal '<em>simple</em>', '[i]simple[/i]'.bbcode_to_html
     assert_equal '<em>simple</em>', '[i:7a9ca2c5c3]simple[/i:7a9ca2c5c3]'.bbcode_to_html
-    assert_equal "<em>line 1<br />\nline 2</em>", "[i:7a9ca2c5c3]line 1\nline 2[/i:7a9ca2c5c3]".bbcode_to_html
+    assert_equal "<em>line 1\nline 2</em>", "[i:7a9ca2c5c3]line 1\nline 2[/i:7a9ca2c5c3]".bbcode_to_html
   end
 
   def test_u
     assert_equal '<span style="text-decoration:underline;">simple</span>', '[u]simple[/u]'.bbcode_to_html
     assert_equal '<span style="text-decoration:underline;">simple</span>', '[u:7a9ca2c5c3]simple[/u:7a9ca2c5c3]'.bbcode_to_html
-    assert_equal '<span style="text-decoration:underline;">line 1<br />\nline 2</span>', "[u:7a9ca2c5c3]line 1\nline 2[/u:7a9ca2c5c3]".bbcode_to_html
+    assert_equal %Q(<span style="text-decoration:underline;">line 1\nline 2</span>), "[u:7a9ca2c5c3]line 1\nline 2[/u:7a9ca2c5c3]".bbcode_to_html
   end
 
   def test_del
@@ -40,7 +40,7 @@ class TestBBRuby < Test::Unit::TestCase
   def test_code
     assert_equal '<code>simple</code>', '[code]simple[/code]'.bbcode_to_html
     assert_equal '<code>simple</code>', '[code:7a9ca2c5c3]simple[/code:7a9ca2c5c3]'.bbcode_to_html
-    assert_equal "<code>var bxi = 0;<br />\n//Holds current speed of scrolling menu</code>", "[code:1:91cbdd72b7]var bxi = 0;\n//Holds current speed of scrolling menu[/code:1:91cbdd72b7]".bbcode_to_html
+    assert_equal "<code>var bxi = 0;\n//Holds current speed of scrolling menu</code>", "[code:1:91cbdd72b7]var bxi = 0;\n//Holds current speed of scrolling menu[/code:1:91cbdd72b7]".bbcode_to_html
   end
 
   def test_size
@@ -113,7 +113,7 @@ class TestBBRuby < Test::Unit::TestCase
   end
 
   def test_double_quote
-   assert_equal '<fieldset><legend>Kitten</legend><blockquote><fieldset><legend>creatiu</legend><blockquote>f1</blockquote></fieldset>f2</blockquote></fieldset>',
+   assert_equal '<fieldset><legend>Kitten</legend><blockquote><fieldset><legend>Quote: &quot;creatiu&quot;</legend><blockquote>f1</blockquote></fieldset>f2</blockquote></fieldset>',
                 '[quote:26fe26a6a9="Kitten"][quote:26fe26a6a93="creatiu"]f1[/quote:26fe26a6a93]f2[/quote:26fe26a6a9]'.bbcode_to_html.bbcode_to_html({}, false, :disable)
   end
 
@@ -121,7 +121,7 @@ class TestBBRuby < Test::Unit::TestCase
     assert_equal '<a href="http://google.com">Google</a>', '[url=http://google.com]Google[/url]'.bbcode_to_html
     assert_equal '<a href="http://google.com">http://google.com</a>', '[url]http://google.com[/url]'.bbcode_to_html
     assert_equal '<a href="http://www.altctrlsupr.com/dmstk/kdd070803/00.html"> ABRIR ALBUM </a>','[URL=http://www.altctrlsupr.com/dmstk/kdd070803/00.html] ABRIR ALBUM [/URL]'.bbcode_to_html
-    assert_equal %Q(<a href="http://www.altctrlsupr.com/dmstk/kdd070803/00.html"> ABRIR<br />\nALBUM </a>),"[URL=http://www.altctrlsupr.com/dmstk/kdd070803/00.html] ABRIR\nALBUM [/URL]".bbcode_to_html
+    assert_equal %Q(<a href="http://www.altctrlsupr.com/dmstk/kdd070803/00.html"> ABRIR\nALBUM </a>),"[URL=http://www.altctrlsupr.com/dmstk/kdd070803/00.html] ABRIR\nALBUM [/URL]".bbcode_to_html
     assert_equal '<a href="http://www.urimalet.com/cadaverex.mp3">aha</a>', "[URL=http://www.urimalet.com/cadaverex.mp3]aha[/URL]".bbcode_to_html
     # allow quoted urls:
     assert_equal '<a href="http://www.apple.com">aha</a>', '[URL="http://www.apple.com"]aha[/URL]'.bbcode_to_html
@@ -195,7 +195,7 @@ class TestBBRuby < Test::Unit::TestCase
 
   def test_to_html_with_no_markup
     foo = "first paragraph\n\nsecond paragraph\nwith a linebreak"
-    assert_equal "first paragraph<br />\n<br />\nsecond paragraph<br />\nwith a linebreak", foo.bbcode_to_html
+    assert_equal foo, foo.bbcode_to_html
   end
 
   def test_to_html_with_formatting
@@ -204,7 +204,7 @@ class TestBBRuby < Test::Unit::TestCase
   end
 
   def test_self_tag_list
-    assert_equal 32, BBRuby.tag_list.size
+    assert_equal 33, BBRuby.tag_list.size
   end
 
   def test_redefinition_of_tag_html
