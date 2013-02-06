@@ -1,7 +1,7 @@
 #! /usr/bin/env ruby
 #coding: utf-8
 
-require File.dirname(__FILE__) + '/test_helper.rb'
+require 'test_helper.rb'
 
 class TestBBRuby < Test::Unit::TestCase
 
