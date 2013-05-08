@@ -256,4 +256,58 @@ class TestBBRuby < Test::Unit::TestCase
     assert_equal "this [b]should not do formatting[/i]", "this [b]should not do formatting[/i]".bbcode_to_html
   end
 
+## proc tests below
+  def test_redefinition_replacement_to_proc # contrived example
+    mydef = {
+      'Quote' => [
+        /\[quote(:.*)?=(?:&quot;)?(.*?)(?:&quot;)?\](.*?)\[\/quote\1?\]/mi,
+        lambda { |e| "<div class=\"quote\"><p><cite>#{e[2]}</cite></p><blockquote>#{e[3]}</blockquote></div>"},
+        'Quote with citation (lambda)',
+        nil, nil,
+        :quote]
+    }
+    assert_equal '<div class="quote"><p><cite>Who</cite></p><blockquote>said that</blockquote></div>', '[quote=Who]said that[/quote]'.bbcode_to_html(mydef)
+  end
+
+  def test_proc_modifer # sum as example
+    mydef = {
+      'Sum (lambda)' => [
+        /\[sum(:.*)?=(?:&quot;)?(.*?)(?:&quot;)?\](\d+?)\+(\d+?)\[\/sum\1?\]/mi,
+        lambda { |e| "<span class=\"#{e[2]}\">#{e[3].to_i + e[4].to_i}</span>"},
+        'Sum (lambda)',
+        nil, nil,
+        :sum]
+    }
+    assert_equal '<span class="sum">4</span>', '[sum=sum]2+2[/sum]'.bbcode_to_html(mydef)
+  end
+
+  # for next test
+  def sum a, b; a + b end
+
+  def test_proc_include_method # sum as example
+    mydef = {
+      'Sum (lambda)' => [
+        /\[sum(:.*)?=(?:&quot;)?(.*?)(?:&quot;)?\](\d+?)\+(\d+?)\[\/sum\1?\]/mi,
+        lambda { |e| "<span class=\"#{e[2]}\">#{sum(e[3].to_i, e[4].to_i)}</span>"},
+        'Sum (lambda)',
+        nil, nil,
+        :sum]
+    }
+    assert_equal '<span class="sum">4</span>', '[sum=sum]2+2[/sum]'.bbcode_to_html(mydef)
+  end
+
+  # Proc.new{} as opposed to lambda{} may have not params
+  def test_proc_instead_of_lambda # copyright
+    copyright = "2913-3013 The Company, Ltd."
+    mydef = {
+      'copy' => [
+        /\[copy\/\]/mi,
+        Proc.new{"<span class=\"copy\">&copy; #{copyright}</span>"},
+        'Copy (Proc)',
+        nil, nil,
+        :copy]
+    }
+    assert_equal '<span class="copy">&copy; 2913-3013 The Company, Ltd.</span>', '[copy/]'.bbcode_to_html(mydef)
+  end
+
 end
