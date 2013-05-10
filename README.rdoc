@@ -55,6 +55,20 @@ Define your own translation, in order to be more flexible:
     }
  
     text.bbcode_to_html(my_blockquote)
+
+Define Proc as replacement:
+
+    module BBRuby
+      @@tags = @@tags.merge({
+          'File' => [
+            /\[file(:.*)?=(.*?)\](.*?)\[\/file\1?\]/mi,
+            lambda{ |e| "<div class="file"><p><cite>#{e[3]}</cite></p><blockquote>#{file_read_method(e[2])}</blockquote></div>"},
+            'File content with citation',
+            '[file=script.rb]Script Caption[/file]',
+            :file
+          ],
+        })
+    end
     
 You can also use the simple_format method of ActionPack by using the *_with_formatting methods:
 

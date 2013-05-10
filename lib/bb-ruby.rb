@@ -10,7 +10,7 @@ module BBRuby
     # tag name => [regex, replace, description, example, enable/disable symbol]
     'Bold' => [
       /\[b(:.*)?\](.*?)\[\/b\1?\]/mi,
-      '<strong>\2</strong>',
+      '<strong>\2</strong>', #Proc alternative for example: lambda{ |e| "<strong>#{e[2]}</strong>" }
       'Embolden text',
       'Look [b]here[/b]',
       :bold],
@@ -298,10 +298,28 @@ module BBRuby
       # parse bbcode tags
       case method
       when :enable
-        tags_definition.each_value { |t| text.gsub!(t[0], t[1]) if tags.include?(t[4]) }
+        tags_definition.each_value do |t|
+          if tags.include?( t[4] )
+            if t[1].class == String
+              text.gsub!( t[0], t[1] ) # just replace if replacement is String
+            else
+              text.gsub!( t[0] ){ t[1].call($~) } # call replacement
+              # It may be Proc or lambda with one argument
+              # Argument is MatchData. See 'Bold' tag name for example.
+            end
+          end
+        end
       when :disable
         # this works nicely because the default is disable and the default set of tags is [] (so none disabled) :)
-        tags_definition.each_value { |t| text.gsub!(t[0], t[1]) unless tags.include?(t[4]) }
+        tags_definition.each_value do |t|
+          unless tags.include?( t[4] )
+            if t[1].class == String
+              text.gsub!( t[0], t[1] )
+            else
+              text.gsub!( t[0] ){ t[1].call($~) }
+            end
+          end
+        end
       end
 
       text
