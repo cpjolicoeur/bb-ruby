@@ -139,6 +139,11 @@ class TestBBRuby < Test::Unit::TestCase
     assert_equal '<img src="http://www.marcodigital.com/sitanddie/sitanddiepequeÃ±o.jpg" alt="" />', '[img:post_uid0]http://www.marcodigital.com/sitanddie/sitanddiepequeÃ±o.jpg[/img:post_uid0]'.bbcode_to_html
   end
 
+  def test_image_link
+    assert_equal %Q(<a href="http://foo.com"><img src="http://foo.com/bar.jpg" alt="" /></a>), %Q([url=http://foo.com][img]http://foo.com/bar.jpg[/img][/url]).bbcode_to_html
+    assert_equal %Q(<a href="http://foo.com"><img src="http://foo.com/bar.jpg" alt="" /></a>), %Q([url=http://foo.com][img=http://foo.com/bar.jpg][/url]).bbcode_to_html
+  end
+
   def test_youtube
     # Uncomment below if using 4:3 format youtube video embed
     # assert_equal '<object width="320" height="265"><param name="movie" value="http://www.youtube.com/v/E4Fbk52Mk1w"></param><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/E4Fbk52Mk1w" type="application/x-shockwave-flash" wmode="transparent" width="320" height="265"></embed></object>','[youtube]http://youtube.com/watch?v=E4Fbk52Mk1w[/youtube]'.bbcode_to_html
