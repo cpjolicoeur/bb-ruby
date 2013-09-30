@@ -1,0 +1,191 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>BB-Ruby by cpjolicoeur</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>BB-Ruby</h1>
+        <p>BBCode implementation for Ruby</p>
+
+        <p class="view"><a href="https://github.com/cpjolicoeur/bb-ruby">View the Project on GitHub <small>cpjolicoeur/bb-ruby</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/cpjolicoeur/bb-ruby/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/cpjolicoeur/bb-ruby/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/cpjolicoeur/bb-ruby">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a name="bbruby" class="anchor" href="#bbruby"><span class="octicon octicon-link"></span></a>BBRuby</h1>
+
+<ul>
+<li><a href="http://bb-ruby.rubyforge.org">http://bb-ruby.rubyforge.org</a></li>
+</ul><h2>
+<a name="description" class="anchor" href="#description"><span class="octicon octicon-link"></span></a>DESCRIPTION:</h2>
+
+<p>BBRuby is a BBCode (<a href="http://www.bbcode.org">http://www.bbcode.org</a>) implementation for Ruby. It will convert strings with BBCode markup to their HTML equivalent.</p>
+
+<h2>
+<a name="install" class="anchor" href="#install"><span class="octicon octicon-link"></span></a>INSTALL:</h2>
+
+<p>To install as a gem:</p>
+
+<pre><code>sudo gem install bb-ruby 
+</code></pre>
+
+<p>To install as a plugin:</p>
+
+<pre><code>./script/plugin install git://github.com/cpjolicoeur/bb-ruby.git
+</code></pre>
+
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>USAGE:</h2>
+
+<pre><code>require 'bb-ruby' # (only needed if installed as a gem)
+</code></pre>
+
+<p>BBRuby has been included directly into the String class for use on any string object:</p>
+
+<pre><code>text = "[b]Here is some bold text[/b] followed by some [u]underlined text[/u]"
+output = text.bbcode_to_html
+text.bbcode_to_html!
+</code></pre>
+
+<p>BBRuby will auto-escape HTML tags.  To prevent this just pass false as the second param:</p>
+
+<pre><code>output = text.bbcode_to_html({}, false)
+</code></pre>
+
+<p>Only allow certain tags:</p>
+
+<pre><code>output = text.bbcode_to_html({}, true, :enable, :image, :bold, :quote)
+</code></pre>
+
+<p>Disable certain tags:</p>
+
+<pre><code>output = text.bbcode_to_html({}, true, :disable, :image, :bold, :quote)
+</code></pre>
+
+<p>Alternative Direct usage:</p>
+
+<pre><code>output = BBRuby.to_html(bbcode_markup)
+</code></pre>
+
+<p>Define your own translation, in order to be more flexible:</p>
+
+<pre><code>my_blockquote = {
+  'Quote' =&gt; [
+    /\[quote(:.*)?=(.*?)\](.*?)\[\/quote\1?\]/mi,
+    '&lt;div class="quote"&gt;&lt;p&gt;&lt;cite&gt;\2&lt;/cite&gt;&lt;/p&gt;&lt;blockquote&gt;\3&lt;/blockquote&gt;&lt;/div&gt;',
+    'Quote with citation',
+    '[quote=mike]please quote me[/quote]',
+    :quote
+  ],      
+}
+
+text.bbcode_to_html(my_blockquote)
+</code></pre>
+
+<p>Define Proc as replacement:</p>
+
+<pre><code>module BBRuby
+  @@tags = @@tags.merge({
+      'File' =&gt; [
+        /\[file(:.*)?=(.*?)\](.*?)\[\/file\1?\]/mi,
+        lambda{ |e| "&lt;div class="file"&gt;&lt;p&gt;&lt;cite&gt;#{e[3]}&lt;/cite&gt;&lt;/p&gt;&lt;blockquote&gt;#{file_read_method(e[2])}&lt;/blockquote&gt;&lt;/div&gt;"},
+        'File content with citation',
+        '[file=script.rb]Script Caption[/file]',
+        :file
+      ],
+    })
+end
+</code></pre>
+
+<p>You can also use the simple_format method of ActionPack by using the *_with_formatting methods:</p>
+
+<pre><code>output = text.bbcode_to_html_with_formatting
+output = text.bbcode_to_html_with_formatting!
+</code></pre>
+
+<h2>
+<a name="tags-processed" class="anchor" href="#tags-processed"><span class="octicon octicon-link"></span></a>TAGS PROCESSED:</h2>
+
+<p>The following is the list of BBCode tags processed by BBRuby and their associated symbol for enabling/disabling them</p>
+
+<ul>
+<li>[b]               :bold</li>
+<li>[i]               :italics</li>
+<li>[u]               :underline</li>
+<li>[s]               :strikeout </li>
+<li>[del]             :delete</li>
+<li>[ins]             :insert</li>
+<li>[code]            :code</li>
+<li>[size]            :size</li>
+<li>[color]           :color</li>
+<li>[ol]              :orderedlist</li>
+<li>[ul]              :unorderedlist</li>
+<li>[li]              :listitem<br>
+</li>
+<li>[*]               :listitem</li>
+<li>[list]            :listitem</li>
+<li>[list=1]          :listitem</li>
+<li>[list=a]          :listitem</li>
+<li>[dl]              :definelist</li>
+<li>[dt]              :defineterm</li>
+<li>[dd]              :definition</li>
+<li>[quote]           :quote</li>
+<li>[quote=source]    :quote</li>
+<li>[url=link]        :link</li>
+<li>[url]             :link</li>
+<li>[img size=]       :image</li>
+<li>[img=]            :image</li>
+<li>[img]             :image</li>
+<li>[youtube]         :video</li>
+<li>[gvideo]         :video</li>
+<li>[vimeo]           :video</li>
+<li>[email]           :email</li>
+</ul><h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>LICENSE:</h2>
+
+<p>Copyright (c) 2008 Craig P Jolicoeur, Fernando Blat</p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/cpjolicoeur">cpjolicoeur</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
