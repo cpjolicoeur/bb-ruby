@@ -253,9 +253,12 @@ module BBRuby
       # parse spacing
       text.gsub!( /\r\n?/, "\n" )
 
-      text.gsub!(/\[quote\]/, '<fieldset><legend>Quote:</legend><blockquote>')
-      text.gsub!(/\[quote(:.*)?="?(.*?)"?\]/, '<fieldset><legend>Quote: \2</legend><blockquote>')
-      text.gsub!(/\[\/quote\]/, '</blockquote></fieldset>')
+      # Special [quote] tag handling
+      if :enable == method && tags.include?(:quote)
+        text.gsub!(/\[quote\]/, '<fieldset><legend>Quote:</legend><blockquote>')
+        text.gsub!(/\[quote(:.*)?="?(.*?)"?\]/, '<fieldset><legend>Quote: \2</legend><blockquote>')
+        text.gsub!(/\[\/quote\]/, '</blockquote></fieldset>')
+      end
 
       # return markup
       text

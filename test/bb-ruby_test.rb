@@ -185,12 +185,14 @@ class TestBBRuby < Test::Unit::TestCase
     assert_equal "[b]foobar[/b]", "[b]foobar[/b]".bbcode_to_html({}, true, :disable, :bold)
     assert_equal "[b]<em>foobar</em>[/b]", "[b][i]foobar[/i][/b]".bbcode_to_html({}, true, :disable, :bold)
     assert_equal "[b][i]foobar[/i][/b]", "[b][i]foobar[/i][/b]".bbcode_to_html({}, true, :disable, :bold, :italics)
+    assert_equal "<fieldset><blockquote>foobar</blockquote></fieldset>", "[quote]foobar[/quote]".bbcode_to_html({}, true, :disable, :underline)
   end
 
   def test_enable_tags
     assert_equal "<strong>foobar</strong>", "[b]foobar[/b]".bbcode_to_html({}, true, :enable, :bold)
     assert_equal "<strong>[i]foobar[/i]</strong>", "[b][i]foobar[/i][/b]".bbcode_to_html({}, true, :enable, :bold)
     assert_equal "<strong><em>foobar</em></strong>", "[b][i]foobar[/i][/b]".bbcode_to_html({}, true, :enable, :bold, :italics)
+    assert_equal "[quote]foobar[/quote]", "[quote]foobar[/quote]".bbcode_to_html({}, true, :enable, :underline)
   end
 
   def test_to_html_bang_method
