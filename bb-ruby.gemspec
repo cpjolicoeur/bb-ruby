@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["cpjolicoeur@gmail.com"]
   gem.description   = %q{BBCode for Ruby}
   gem.summary       = %q{BBRuby is a BBCode implementation for Ruby. It will convert strings with BBCode markup to their HTML equivalent}
-  gem.homepage      = "https://github.com/cpjolicoeur/bb-ruby"
+  gem.homepage      = "http://cpjolicoeur.github.io/bb-ruby/"
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
