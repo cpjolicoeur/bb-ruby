@@ -1,3 +1,7 @@
+== 1.0.1 2013-09-30
+
+* Fix bug with [quote] tags and :enable/:disable flags
+
 == 1.0 2013-05-9
 
 * Enable Procs to be used in custom defined replacements
