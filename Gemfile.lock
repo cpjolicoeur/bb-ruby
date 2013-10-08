@@ -1,12 +1,12 @@
 PATH
   remote: .
   specs:
-    bb-ruby (1.0)
+    bb-ruby (1.0.2)
 
 GEM
   remote: https://rubygems.org/
   specs:
-    rake (10.0.3)
+    rake (10.1.0)
 
 PLATFORMS
   ruby
