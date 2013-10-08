@@ -1,3 +1,7 @@
+== 1.0.2 2013-10-08
+
+* Add MIT license information
+
 == 1.0.1 2013-09-30
 
 * Fix bug with [quote] tags and :enable/:disable flags
