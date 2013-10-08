@@ -1,5 +1,3 @@
-require "bb-ruby/version"
-
 module BBRuby
   # allowable image formats
   @@imageformats = 'png|bmp|jpg|gif|jpeg'
