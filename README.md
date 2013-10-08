@@ -1,6 +1,6 @@
 # BBRuby
 
-* [http://rubygems.org/gems/bb-ruby](http://rubygems.org/gems/bb-ruby)
+* [http://rubygems.org/gems/bb-ruby](http://rubygems.org/gems/bb-ruby) [![Build Status](https://travis-ci.org/cpjolicoeur/bb-ruby.png?branch=master)](https://travis-ci.org/cpjolicoeur/bb-ruby)
 
 ## Description:
 
@@ -9,7 +9,7 @@ BBRuby is a [BBCode](http://www.bbcode.org) implementation for Ruby. It will con
 ## Installation:
 
     gem install bb-ruby
-  
+
 
 ## Usage:
 
@@ -46,9 +46,9 @@ Define your own translation, in order to be more flexible:
         'Quote with citation',
         '[quote=mike]please quote me[/quote]',
         :quote
-      ],      
+      ],
     }
- 
+
     text.bbcode_to_html(my_blockquote)
 
 Define Proc as replacement:
@@ -64,7 +64,7 @@ Define Proc as replacement:
           ],
         })
     end
-    
+
 You can also use the simple_format method of ActionPack by using the *_with_formatting methods:
 
     output = text.bbcode_to_html_with_formatting
@@ -78,7 +78,7 @@ The following is the list of BBCode tags processed by BBRuby and their associate
     [b]               :bold
     [i]               :italics
     [u]               :underline
-    [s]               :strikeout 
+    [s]               :strikeout
     [del]             :delete
     [ins]             :insert
     [code]            :code
@@ -86,7 +86,7 @@ The following is the list of BBCode tags processed by BBRuby and their associate
     [color]           :color
     [ol]              :orderedlist
     [ul]              :unorderedlist
-    [li]              :listitem    
+    [li]              :listitem
     [*]               :listitem
     [list]            :listitem
     [list=1]          :listitem
