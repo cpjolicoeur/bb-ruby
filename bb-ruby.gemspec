@@ -11,6 +11,7 @@ Gem::Specification.new do |gem|
   gem.description   = %q{BBCode for Ruby}
   gem.summary       = %q{BBRuby is a BBCode implementation for Ruby. It will convert strings with BBCode markup to their HTML equivalent}
   gem.homepage      = "http://cpjolicoeur.github.io/bb-ruby/"
+  gem.license       = 'MIT'
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
