@@ -145,10 +145,16 @@ module BBRuby
       "Maybe try looking on [url]http://google.com[/url]",
       :link],
     'Link (Automatic)' => [
-      /(\A|\s)((https?:\/\/|www\.)[^\s<]+)/,
+      /(\A|\s)(https?:\/\/[^\s<]+)/,
       ' <a href="\2">\2</a>',
       'Hyperlink (automatic)',
       'Maybe try looking on http://www.google.com',
+      :link],
+    'Link (Automatic without leading http(s))' => [
+      /(\A|\s)(www\.[^\s<]+)/,
+      ' <a href="http://\2">\2</a>',
+      'Hyperlink (automatic without leading http(s))',
+      'Maybe try looking on www.google.com',
       :link],
     'Image (Resized)' => [
       /\[img(:.+)? size=#{@@quote_matcher}(\d+)x(\d+)\2\](.*?)\[\/img\1?\]/im,
