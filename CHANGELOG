@@ -1,3 +1,7 @@
+== 1.0.3 2013-10-18
+
+* Fix but with auto-detection of links without protocol
+
 == 1.0.2 2013-10-08
 
 * Add MIT license information
