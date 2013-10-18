@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    bb-ruby (1.0.2)
+    bb-ruby (1.0.3)
 
 GEM
   remote: https://rubygems.org/
