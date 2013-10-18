@@ -168,6 +168,11 @@ class TestBBRuby < Test::Unit::TestCase
     assert_equal %Q(Try using google <a href="http://google.com">http://google.com</a>), 'Try using google http://google.com'.bbcode_to_html
     assert_equal %Q(Try using googlehttp://google.com), 'Try using googlehttp://google.com'.bbcode_to_html
     assert_equal %Q( <a href="http://google.com">http://google.com</a>), 'http://google.com'.bbcode_to_html
+    # links without leading http(s)
+    assert_equal %Q(previous text <a href="http://www.google.com">www.google.com</a> post text), 'previous text www.google.com post text'.bbcode_to_html
+    assert_equal %Q(Try using google <a href="http://www.google.com">www.google.com</a>), 'Try using google www.google.com'.bbcode_to_html
+    assert_equal %Q(Try using googlewww.google.com), 'Try using googlewww.google.com'.bbcode_to_html
+    assert_equal %Q( <a href="http://www.google.com">www.google.com</a>), 'www.google.com'.bbcode_to_html
   end
 
   def test_html_escaping
@@ -212,7 +217,7 @@ class TestBBRuby < Test::Unit::TestCase
   end
 
   def test_self_tag_list
-    assert_equal 33, BBRuby.tag_list.size
+    assert_equal 34, BBRuby.tag_list.size
   end
 
   def test_redefinition_of_tag_html
