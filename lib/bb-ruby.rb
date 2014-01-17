@@ -257,13 +257,6 @@ module BBRuby
       # parse spacing
       text.gsub!( /\r\n?/, "\n" )
 
-      # Special [quote] tag handling
-      if :enable == method && tags.include?(:quote)
-        text.gsub!(/\[quote\]/, '<fieldset><legend>Quote:</legend><blockquote>')
-        text.gsub!(/\[quote(:.*)?="?(.*?)"?\]/, '<fieldset><legend>Quote: \2</legend><blockquote>')
-        text.gsub!(/\[\/quote\]/, '</blockquote></fieldset>')
-      end
-
       # return markup
       text
     end
@@ -306,30 +299,28 @@ module BBRuby
       case method
       when :enable
         tags_definition.each_value do |t|
-          if tags.include?( t[4] )
-            if t[1].class == String
-              text.gsub!( t[0], t[1] ) # just replace if replacement is String
-            else
-              text.gsub!( t[0] ){ t[1].call($~) } # call replacement
-              # It may be Proc or lambda with one argument
-              # Argument is MatchData. See 'Bold' tag name for example.
-            end
-          end
+          gsub!(text, t[0], t[1]) if tags.include?( t[4] )
         end
       when :disable
         # this works nicely because the default is disable and the default set of tags is [] (so none disabled) :)
         tags_definition.each_value do |t|
-          unless tags.include?( t[4] )
-            if t[1].class == String
-              text.gsub!( t[0], t[1] )
-            else
-              text.gsub!( t[0] ){ t[1].call($~) }
-            end
-          end
+          gsub!(text, t[0], t[1]) unless tags.include?( t[4] )
         end
       end
 
       text
+    end
+
+    def gsub!(text, pattern, replacement)
+      if replacement.class == String
+        # just replace if replacement is String
+        while text.gsub!( pattern, replacement ); end
+      else
+        # call replacement
+        # It may be Proc or lambda with one argument
+        # Argument is MatchData. See 'Bold' tag name for example.
+        while text.gsub!( pattern ){ replacement.call($~) }; end
+      end
     end
 
     # extracted from Rails ActionPack

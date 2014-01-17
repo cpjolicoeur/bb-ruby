@@ -112,12 +112,6 @@ class TestBBRuby < Test::Unit::TestCase
     assert_equal '<fieldset><legend>Who</legend><blockquote>said that</blockquote></fieldset>', '[quote=Who]said that[/quote]'.bbcode_to_html.bbcode_to_html({}, false, :disable)
   end
 
-  # FIXME: failing test
-  # def test_double_quote
-  #  assert_equal '<fieldset><legend>Kitten</legend><blockquote><fieldset><legend>Quote: &quot;creatiu&quot;</legend><blockquote>f1</blockquote></fieldset>f2</blockquote></fieldset>',
-  #               '[quote:26fe26a6a9="Kitten"][quote:26fe26a6a93="creatiu"]f1[/quote:26fe26a6a93]f2[/quote:26fe26a6a9]'.bbcode_to_html.bbcode_to_html({}, false, :disable)
-  # end
-
   def test_link
     assert_equal '<a href="http://google.com">Google</a>', '[url=http://google.com]Google[/url]'.bbcode_to_html
     assert_equal '<a href="http://google.com">http://google.com</a>', '[url]http://google.com[/url]'.bbcode_to_html
@@ -321,6 +315,13 @@ class TestBBRuby < Test::Unit::TestCase
         :copy]
     }
     assert_equal '<span class="copy">&copy; 2913-3013 The Company, Ltd.</span>', '[copy/]'.bbcode_to_html(mydef)
+  end
+
+  def test_nested_tags
+    assert_equal '<span style="color: red;">Red Text<span style="color: green;">Green Text</span>Red Again</span>', '[color=red]Red Text[color=green]Green Text[/color]Red Again[/color]'.bbcode_to_html
+    assert_equal '<fieldset><blockquote>first<fieldset><blockquote>second</blockquote></fieldset>first again</blockquote></fieldset>', '[quote]first[quote]second[/quote]first again[/quote]'.bbcode_to_html
+    assert_equal '<fieldset><legend>first author</legend><blockquote>first<fieldset><legend>second author</legend><blockquote>second</blockquote></fieldset>first again</blockquote></fieldset>', '[quote="first author"]first[quote="second author"]second[/quote]first again[/quote]'.bbcode_to_html
+    assert_equal '<fieldset><legend>Kitten</legend><blockquote><fieldset><legend>creatiu</legend><blockquote>f1</blockquote></fieldset>f2</blockquote></fieldset>', '[quote:26fe26a6a9="Kitten"][quote:26fe26a6a93="creatiu"]f1[/quote:26fe26a6a93]f2[/quote:26fe26a6a9]'.bbcode_to_html.bbcode_to_html({}, false, :disable)
   end
 
 end
