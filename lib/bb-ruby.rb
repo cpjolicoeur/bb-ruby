@@ -124,13 +124,13 @@ module BBRuby
       /\[quote(:.*)?=(?:&quot;)?(.*?)(?:&quot;)?\](.*?)\[\/quote\1?\]/mi,
       '<fieldset><legend>\2</legend><blockquote>\3</blockquote></fieldset>',
       'Quote with citation',
-      "[quote=mike]Now is the time...[/quote]",
+      '[quote=mike]Now is the time...[/quote]',
       :quote],
     'Quote (Sourceless)' => [
       /\[quote(:.*)?\](.*?)\[\/quote\1?\]/mi,
       '<fieldset><blockquote>\2</blockquote></fieldset>',
       'Quote (sourceclass)',
-      "[quote]Now is the time...[/quote]",
+      '[quote]Now is the time...[/quote]',
       :quote],
     'Link' => [
       /\[url=(?:&quot;)?(.*?)(?:&quot;)?\](.*?)\[\/url\]/mi,
@@ -142,7 +142,7 @@ module BBRuby
       /\[url\](.*?)\[\/url\]/mi,
       '<a href="\1">\1</a>',
       'Hyperlink (implied)',
-      "Maybe try looking on [url]http://google.com[/url]",
+      'Maybe try looking on [url]http://google.com[/url]',
       :link],
     'Link (Automatic)' => [
       /(\A|\s)(https?:\/\/[^\s<]+)/,
@@ -331,7 +331,7 @@ module BBRuby
       text.gsub!(/\n\n+/, "</p>\n\n#{start_tag}")  # 2+ newline  => paragraph
       text.gsub!(/([^\n]\n)(?=[^\n])/, '\1<br />')  # 1 newline   => br
       text.insert 0, start_tag
-      text << "</p>"
+      text << '</p>'
     end
   end # class << self
 

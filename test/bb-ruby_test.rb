@@ -117,7 +117,7 @@ class TestBBRuby < Test::Unit::TestCase
     assert_equal '<a href="http://google.com">http://google.com</a>', '[url]http://google.com[/url]'.bbcode_to_html
     assert_equal '<a href="http://www.altctrlsupr.com/dmstk/kdd070803/00.html"> ABRIR ALBUM </a>','[URL=http://www.altctrlsupr.com/dmstk/kdd070803/00.html] ABRIR ALBUM [/URL]'.bbcode_to_html
     assert_equal %Q(<a href="http://www.altctrlsupr.com/dmstk/kdd070803/00.html"> ABRIR\nALBUM </a>),"[URL=http://www.altctrlsupr.com/dmstk/kdd070803/00.html] ABRIR\nALBUM [/URL]".bbcode_to_html
-    assert_equal '<a href="http://www.urimalet.com/cadaverex.mp3">aha</a>', "[URL=http://www.urimalet.com/cadaverex.mp3]aha[/URL]".bbcode_to_html
+    assert_equal '<a href="http://www.urimalet.com/cadaverex.mp3">aha</a>', '[URL=http://www.urimalet.com/cadaverex.mp3]aha[/URL]'.bbcode_to_html
     # allow quoted urls:
     assert_equal '<a href="http://www.apple.com">aha</a>', '[URL="http://www.apple.com"]aha[/URL]'.bbcode_to_html
   end
@@ -170,34 +170,34 @@ class TestBBRuby < Test::Unit::TestCase
   end
 
   def test_html_escaping
-    assert_equal "<strong>&lt;i&gt;foobar&lt;/i&gt;</strong>", '[b]<i>foobar</i>[/b]'.bbcode_to_html
-    assert_equal "<strong><i>foobar</i></strong>", '[b]<i>foobar</i>[/b]'.bbcode_to_html({}, false)
-    assert_equal "1 is &lt; 2", '1 is < 2'.bbcode_to_html
-    assert_equal "1 is < 2", '1 is < 2'.bbcode_to_html({}, false)
-    assert_equal "2 is &gt; 1", '2 is > 1'.bbcode_to_html
-    assert_equal "2 is > 1", '2 is > 1'.bbcode_to_html({}, false)
+    assert_equal '<strong>&lt;i&gt;foobar&lt;/i&gt;</strong>', '[b]<i>foobar</i>[/b]'.bbcode_to_html
+    assert_equal '<strong><i>foobar</i></strong>', '[b]<i>foobar</i>[/b]'.bbcode_to_html({}, false)
+    assert_equal '1 is &lt; 2', '1 is < 2'.bbcode_to_html
+    assert_equal '1 is < 2', '1 is < 2'.bbcode_to_html({}, false)
+    assert_equal '2 is &gt; 1', '2 is > 1'.bbcode_to_html
+    assert_equal '2 is > 1', '2 is > 1'.bbcode_to_html({}, false)
     assert_equal %Q{&quot;double quotes&quot; and &apos;single quotes&apos;}, %Q{"double quotes" and 'single quotes'}.bbcode_to_html
     assert_equal %Q{"double quotes" and 'single quotes'}, %Q{"double quotes" and 'single quotes'}.bbcode_to_html({}, false)
   end
 
   def test_disable_tags
-    assert_equal "[b]foobar[/b]", "[b]foobar[/b]".bbcode_to_html({}, true, :disable, :bold)
-    assert_equal "[b]<em>foobar</em>[/b]", "[b][i]foobar[/i][/b]".bbcode_to_html({}, true, :disable, :bold)
-    assert_equal "[b][i]foobar[/i][/b]", "[b][i]foobar[/i][/b]".bbcode_to_html({}, true, :disable, :bold, :italics)
-    assert_equal "<fieldset><blockquote>foobar</blockquote></fieldset>", "[quote]foobar[/quote]".bbcode_to_html({}, true, :disable, :underline)
+    assert_equal '[b]foobar[/b]', '[b]foobar[/b]'.bbcode_to_html({}, true, :disable, :bold)
+    assert_equal '[b]<em>foobar</em>[/b]', '[b][i]foobar[/i][/b]'.bbcode_to_html({}, true, :disable, :bold)
+    assert_equal '[b][i]foobar[/i][/b]', '[b][i]foobar[/i][/b]'.bbcode_to_html({}, true, :disable, :bold, :italics)
+    assert_equal '<fieldset><blockquote>foobar</blockquote></fieldset>', '[quote]foobar[/quote]'.bbcode_to_html({}, true, :disable, :underline)
   end
 
   def test_enable_tags
-    assert_equal "<strong>foobar</strong>", "[b]foobar[/b]".bbcode_to_html({}, true, :enable, :bold)
-    assert_equal "<strong>[i]foobar[/i]</strong>", "[b][i]foobar[/i][/b]".bbcode_to_html({}, true, :enable, :bold)
-    assert_equal "<strong><em>foobar</em></strong>", "[b][i]foobar[/i][/b]".bbcode_to_html({}, true, :enable, :bold, :italics)
-    assert_equal "[quote]foobar[/quote]", "[quote]foobar[/quote]".bbcode_to_html({}, true, :enable, :underline)
+    assert_equal '<strong>foobar</strong>', '[b]foobar[/b]'.bbcode_to_html({}, true, :enable, :bold)
+    assert_equal '<strong>[i]foobar[/i]</strong>', '[b][i]foobar[/i][/b]'.bbcode_to_html({}, true, :enable, :bold)
+    assert_equal '<strong><em>foobar</em></strong>', '[b][i]foobar[/i][/b]'.bbcode_to_html({}, true, :enable, :bold, :italics)
+    assert_equal '[quote]foobar[/quote]', '[quote]foobar[/quote]'.bbcode_to_html({}, true, :enable, :underline)
   end
 
   def test_to_html_bang_method
-    foo = "[b]foobar[/b]"
-    assert_equal "<strong>foobar</strong>", foo.bbcode_to_html!
-    assert_equal "<strong>foobar</strong>", foo
+    foo = '[b]foobar[/b]'
+    assert_equal '<strong>foobar</strong>', foo.bbcode_to_html!
+    assert_equal '<strong>foobar</strong>', foo
   end
 
   def test_to_html_with_no_markup
@@ -247,20 +247,20 @@ class TestBBRuby < Test::Unit::TestCase
   end
 
   def test_multiple_tag_test
-    assert_equal "<strong>bold</strong><em>italic</em><span style=\"text-decoration:underline;\">underline</span><fieldset><blockquote>quote</blockquote></fieldset><a href=\"foobar\">link</a>", "[b]bold[/b][i]italic[/i][u]underline[/u][quote]quote[/quote][url=foobar]link[/url]".bbcode_to_html
-    assert_equal "<strong>bold</strong><em>italic</em><span style=\"text-decoration:underline;\">underline</span><fieldset><blockquote>quote</blockquote></fieldset><a href=\"foobar\">link</a>", "[b]bold[/b][i]italic[/i][u]underline[/u][quote]quote[/quote][url=foobar]link[/url]".bbcode_to_html({}, true, :enable, :bold, :italics, :underline, :link, :quote)
+    assert_equal "<strong>bold</strong><em>italic</em><span style=\"text-decoration:underline;\">underline</span><fieldset><blockquote>quote</blockquote></fieldset><a href=\"foobar\">link</a>", '[b]bold[/b][i]italic[/i][u]underline[/u][quote]quote[/quote][url=foobar]link[/url]'.bbcode_to_html
+    assert_equal "<strong>bold</strong><em>italic</em><span style=\"text-decoration:underline;\">underline</span><fieldset><blockquote>quote</blockquote></fieldset><a href=\"foobar\">link</a>", '[b]bold[/b][i]italic[/i][u]underline[/u][quote]quote[/quote][url=foobar]link[/url]'.bbcode_to_html({}, true, :enable, :bold, :italics, :underline, :link, :quote)
   end
 
   def test_no_ending_tag
-    assert_equal "this [b]should not be bold", "this [b]should not be bold".bbcode_to_html
+    assert_equal 'this [b]should not be bold', 'this [b]should not be bold'.bbcode_to_html
   end
 
   def test_no_start_tag
-    assert_equal "this should not be bold[/b]", "this should not be bold[/b]".bbcode_to_html
+    assert_equal 'this should not be bold[/b]', 'this should not be bold[/b]'.bbcode_to_html
   end
 
   def test_different_start_and_ending_tags
-    assert_equal "this [b]should not do formatting[/i]", "this [b]should not do formatting[/i]".bbcode_to_html
+    assert_equal 'this [b]should not do formatting[/i]', 'this [b]should not do formatting[/i]'.bbcode_to_html
   end
 
 ## proc tests below
@@ -305,7 +305,7 @@ class TestBBRuby < Test::Unit::TestCase
 
   # Proc.new{} as opposed to lambda{} may have not params
   def test_proc_instead_of_lambda # copyright
-    copyright = "2913-3013 The Company, Ltd."
+    copyright = '2913-3013 The Company, Ltd.'
     mydef = {
       'copy' => [
         /\[copy\/\]/mi,
