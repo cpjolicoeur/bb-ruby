@@ -289,7 +289,7 @@ class TestBBRuby < Test::Unit::TestCase
   end
 
   # for next test
-  def sum a, b; a + b end
+  def sum(a, b); a + b end
 
   def test_proc_include_method # sum as example
     mydef = {
