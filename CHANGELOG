@@ -1,6 +1,7 @@
 == 1.0.5 2014-08-28
 
 * Added support for parsing multiple [email] fields
+* Added support for parsing multiple [youtube] fields
 
 == 1.0.4 2014-01-17
 
