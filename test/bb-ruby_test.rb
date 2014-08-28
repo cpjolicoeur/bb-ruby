@@ -154,6 +154,8 @@ class TestBBRuby < Test::Unit::TestCase
 
   def test_email
     assert_equal '<a href="mailto:wadus@wadus.com">wadus@wadus.com</a>', '[email]wadus@wadus.com[/email]'.bbcode_to_html
+    assert_equal '<a href="mailto:wadus@wadus.com">EMAIL ME</a>', '[email:wadus@wadus.com]EMAIL ME[/email]'.bbcode_to_html
+    assert_equal '<a href="mailto:wadus@wadus.com">EMAIL ME</a>', '[email=wadus@wadus.com]EMAIL ME[/email]'.bbcode_to_html
     assert_equal '<a href="mailto:abc@example.com">abc@example.com</a><a href="mailto:xyz@example.com">xyz@example.com</a>', '[email]abc@example.com[/email][email]xyz@example.com[/email]'.bbcode_to_html
   end
 
@@ -212,7 +214,7 @@ class TestBBRuby < Test::Unit::TestCase
   end
 
   def test_self_tag_list
-    assert_equal 34, BBRuby.tag_list.size
+    assert_equal 35, BBRuby.tag_list.size
   end
 
   def test_redefinition_of_tag_html

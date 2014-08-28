@@ -201,10 +201,16 @@ module BBRuby
       '[gvideo]http://video.google.com/videoplay?docid=-2200109535941088987[/gvideo]',
       :video],
     'Email' => [
-      /\[email(:.+)?\](.+)\[\/email\1?\]/i,
-      '<a href="mailto:\2">\2</a>',
+      %r{\[email[^:=]?\](((?!\[/email\]).)*)\[/email\]}mi,
+      '<a href="mailto:\1">\1</a>',
       'Link to email address',
       '[email]wadus@wadus.com[/email]',
+      :email],
+    'Email (alternative)' => [
+      %r{\[email[:=]([^\]]+)\](((?!\[/email\]).)*)(\[/email\1?\])?}mi,
+      '<a href="mailto:\1">\2</a>',
+      'Link to email address',
+      '[email:wadus@wadus.com]Email Me[/email]',
       :email],
     'Align' => [
       /\[align=(.*?)\](.*?)\[\/align\]/mi,
