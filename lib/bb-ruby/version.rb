@@ -1,3 +1,3 @@
 module BBRuby
-  VERSION = "1.0.4"
+  VERSION = '1.0.4'
 end
