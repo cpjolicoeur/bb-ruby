@@ -215,7 +215,7 @@ class TestBBRuby < Test::Unit::TestCase
   end
 
   def test_self_tag_list
-    assert_equal 35, BBRuby.tag_list.size
+    assert_equal 38, BBRuby.tag_list.size
   end
 
   def test_redefinition_of_tag_html
@@ -326,6 +326,21 @@ class TestBBRuby < Test::Unit::TestCase
     assert_equal '<fieldset><blockquote>first<fieldset><blockquote>second</blockquote></fieldset>first again</blockquote></fieldset>', '[quote]first[quote]second[/quote]first again[/quote]'.bbcode_to_html
     assert_equal '<fieldset><legend>first author</legend><blockquote>first<fieldset><legend>second author</legend><blockquote>second</blockquote></fieldset>first again</blockquote></fieldset>', '[quote="first author"]first[quote="second author"]second[/quote]first again[/quote]'.bbcode_to_html
     assert_equal '<fieldset><legend>Kitten</legend><blockquote><fieldset><legend>creatiu</legend><blockquote>f1</blockquote></fieldset>f2</blockquote></fieldset>', '[quote:26fe26a6a9="Kitten"][quote:26fe26a6a93="creatiu"]f1[/quote:26fe26a6a93]f2[/quote:26fe26a6a9]'.bbcode_to_html.bbcode_to_html({}, false, :disable)
+  end
+
+  def test_left
+    assert_equal '<div style="text-align: left;">simple</div>', '[left]simple[/left]'.bbcode_to_html
+    assert_equal '<div style="text-align: left;">simple</div>', '[left:7a9ca2c5c3]simple[/left:7a9ca2c5c3]'.bbcode_to_html
+  end
+
+  def test_center
+    assert_equal '<div style="text-align: center;">simple</div>', '[center]simple[/center]'.bbcode_to_html
+    assert_equal '<div style="text-align: center;">simple</div>', '[center:7a9ca2c5c3]simple[/center:7a9ca2c5c3]'.bbcode_to_html
+  end
+
+  def test_right
+    assert_equal '<div style="text-align: right;">simple</div>', '[right]simple[/right]'.bbcode_to_html
+    assert_equal '<div style="text-align: right;">simple</div>', '[right:7a9ca2c5c3]simple[/right:7a9ca2c5c3]'.bbcode_to_html
   end
 
 end

@@ -217,7 +217,25 @@ module BBRuby
       "<span class=\"bb-ruby_align_\\1\" style=\"float:\\1;\">\\2</span>",
       'Align this object using float',
       'Here\'s a wrapped image: [align=right][img]image.png[/img][/align]',
-      :align]
+      :align],
+    'Left' => [
+      /\[left(:.+)?\](.*?)\[\/left\1?\]/mi,
+      "<div style=\"text-align: left;\">\\2</div>",
+      'Aligns contents along the left side',
+      '[left]Left-aligned content[/left]',
+      :left],
+    'Center' => [
+      /\[center(:.+)?\](.*?)\[\/center\1?\]/mi,
+      "<div style=\"text-align: center;\">\\2</div>",
+      'Aligns contents on the center',
+      '[center]Centered content[/center]',
+      :center],
+    'Right' => [
+      /\[right(:.+)?\](.*?)\[\/right\1?\]/mi,
+      "<div style=\"text-align: right;\">\\2</div>",
+      'Aligns contents along the right side',
+      '[right]Right-aligned content[/right]',
+      :right]
   }
 
   class << self
