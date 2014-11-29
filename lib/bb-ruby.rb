@@ -235,7 +235,13 @@ module BBRuby
       "<div style=\"text-align: right;\">\\2</div>",
       'Aligns contents along the right side',
       '[right]Right-aligned content[/right]',
-      :right]
+      :right],
+    'Line break' => [
+      /\[br\]/mi,
+      "<br />",
+      'Inserts line break tag',
+      'One[br]Two[br]Three lines!',
+      :br]
   }
 
   class << self

@@ -215,7 +215,7 @@ class TestBBRuby < Test::Unit::TestCase
   end
 
   def test_self_tag_list
-    assert_equal 38, BBRuby.tag_list.size
+    assert_equal 39, BBRuby.tag_list.size
   end
 
   def test_redefinition_of_tag_html
@@ -341,6 +341,10 @@ class TestBBRuby < Test::Unit::TestCase
   def test_right
     assert_equal '<div style="text-align: right;">simple</div>', '[right]simple[/right]'.bbcode_to_html
     assert_equal '<div style="text-align: right;">simple</div>', '[right:7a9ca2c5c3]simple[/right:7a9ca2c5c3]'.bbcode_to_html
+  end
+
+  def test_br
+    assert_equal 'One<br />Two<br />Three lines!', 'One[br]Two[br]Three lines!'.bbcode_to_html
   end
 
 end
