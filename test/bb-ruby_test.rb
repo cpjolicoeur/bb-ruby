@@ -131,6 +131,8 @@ class TestBBRuby < Test::Unit::TestCase
     assert_equal '<img src="http://zoople/hochzeit.png" style="width: 95px; height: 96px;" />', '[img:7a9ca2c5c3 size="95x96"]http://zoople/hochzeit.png[/img:7a9ca2c5c3]'.bbcode_to_html
     assert_equal '<img src="http://zoople/hochzeit.png" style="width: 95px; height: 96px;" />', '[img:7a9ca2c5c3 size=\'95x96\']http://zoople/hochzeit.png[/img:7a9ca2c5c3]'.bbcode_to_html
     assert_equal '<img src="http://www.marcodigital.com/sitanddie/sitanddiepequeÃ±o.jpg" alt="" />', '[img:post_uid0]http://www.marcodigital.com/sitanddie/sitanddiepequeÃ±o.jpg[/img:post_uid0]'.bbcode_to_html
+    assert_equal '<img src="http://foo.bar/baz.png" alt="" style="float: left;" />', '[img align=left]http://foo.bar/baz.png[/img]'.bbcode_to_html
+    assert_equal '<img src="http://foo.bar/baz.png" alt="" style="float: right;" />', '[img align=right]http://foo.bar/baz.png[/img]'.bbcode_to_html
   end
 
   def test_image_link
@@ -215,7 +217,7 @@ class TestBBRuby < Test::Unit::TestCase
   end
 
   def test_self_tag_list
-    assert_equal 39, BBRuby.tag_list.size
+    assert_equal 40, BBRuby.tag_list.size
   end
 
   def test_redefinition_of_tag_html

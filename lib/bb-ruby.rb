@@ -168,6 +168,12 @@ module BBRuby
       'Display an image (alternative format)',
       '[img=http://myimage.com/logo.gif]',
       :image],
+    'Image (Aligned)' => [
+      /\[img(:.+)? align=(left|right)\](.*?)\[\/img\1?\]/im,
+      '<img src="\3" alt="" style="float: \2;" />',
+      'Display an aligned image',
+      '[img align=right]http://catsweekly.com/crazycat.jpg[/img]',
+      :image],
     'Image' => [
       /\[img(:.+)?\]([^\[\]].*?)\.(#{@@imageformats})\[\/img\1?\]/im,
       '<img src="\2.\3" alt="" />',
