@@ -99,6 +99,7 @@ The following is the list of BBCode tags processed by BBRuby and their associate
     [url=link]        :link
     [url]             :link
     [img size=]       :image
+    [img align=]      :image
     [img=]            :image
     [img]             :image
     [youtube]         :video
@@ -106,3 +107,7 @@ The following is the list of BBCode tags processed by BBRuby and their associate
     [vimeo]           :video
     [email]           :email
     [align]           :align
+    [left]            :left
+    [center]          :center
+    [right]           :right
+    [br]              :br
