@@ -1,3 +1,7 @@
+== 1.1.0 2014-12-1
+
+* Added left, right, center, br tags
+
 == 1.0.5 2014-08-28
 
 * Added support for parsing multiple [email] fields
