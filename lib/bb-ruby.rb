@@ -183,20 +183,20 @@ module BBRuby
     'YouTube' => [
       /\[youtube\](.*?)\?v=([\w\d\-]+).*?\[\/youtube\]/im,
       # '<object width="400" height="330"><param name="movie" value="http://www.youtube.com/v/\2"></param><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/\2" type="application/x-shockwave-flash" wmode="transparent" width="400" height="330"></embed></object>',
-      '<object width="320" height="265"><param name="movie" value="http://www.youtube.com/v/\2"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/\2" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="320" height="265"></embed></object>',
+      '<iframe id="ytplayer" type="text/html" width="640" height="390" src="http://www.youtube.com/embed/\2" frameborder="0"/>',
       'Display a video from YouTube.com',
       '[youtube]http://youtube.com/watch?v=E4Fbk52Mk1w[/youtube]',
       :video],
     'YouTube (Alternative)' => [
       /\[youtube\](.*?)\/v\/([\w\d\-]+)\[\/youtube\]/im,
       # '<object width="400" height="330"><param name="movie" value="http://www.youtube.com/v/\2"></param><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/\2" type="application/x-shockwave-flash" wmode="transparent" width="400" height="330"></embed></object>',
-      '<object width="320" height="265"><param name="movie" value="http://www.youtube.com/v/\2"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/\2" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="320" height="265"></embed></object>',
+      '<iframe id="ytplayer" type="text/html" width="640" height="390" src="http://www.youtube.com/embed/\2" frameborder="0"/>',
       'Display a video from YouTube.com (alternative format)',
       '[youtube]http://youtube.com/watch/v/E4Fbk52Mk1w[/youtube]',
       :video],
     'Vimeo' => [
       /\[vimeo\](.*?)\/(\d+)\[\/vimeo\]/im,
-      '<object type="application/x-shockwave-flash" width="500" height="350" data="http://www.vimeo.com/moogaloop.swf?clip_id=\2"><param name="quality" value="best" /><param name="allowfullscreen" value="true" /><param name="scale" value="showAll" /><param name="movie" value="http://www.vimeo.com/moogaloop.swf?clip_id=\2" /></object>',
+      '<iframe src="//player.vimeo.com/video/\2" width="640" height="390" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>',
       'Display a video from Vimeo',
       '[vimeo]http://www.vimeo.com/3485239[/vimeo]',
       :video],

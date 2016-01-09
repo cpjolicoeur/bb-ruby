@@ -142,13 +142,13 @@ class TestBBRuby < Test::Unit::TestCase
 
   def test_youtube
     # Uncomment below if using 4:3 format youtube video embed
-    # assert_equal '<object width="320" height="265"><param name="movie" value="http://www.youtube.com/v/E4Fbk52Mk1w"></param><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/E4Fbk52Mk1w" type="application/x-shockwave-flash" wmode="transparent" width="320" height="265"></embed></object>','[youtube]http://youtube.com/watch?v=E4Fbk52Mk1w[/youtube]'.bbcode_to_html
-    assert_equal '<object width="320" height="265"><param name="movie" value="http://www.youtube.com/v/E4Fbk52Mk1w"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/E4Fbk52Mk1w" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="320" height="265"></embed></object>', '[youtube]http://youtube.com/watch?v=E4Fbk52Mk1w[/youtube]'.bbcode_to_html
-    assert_equal '<object width="320" height="265"><param name="movie" value="http://www.youtube.com/v/E4Fbk52Mk1w"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/E4Fbk52Mk1w" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="320" height="265"></embed></object><object width="320" height="265"><param name="movie" value="http://www.youtube.com/v/abc123"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/abc123" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="320" height="265"></embed></object>', '[youtube]http://youtube.com/watch?v=E4Fbk52Mk1w[/youtube][youtube]http://youtube.com/watch?v=abc123[/youtube]'.bbcode_to_html
+    # assert_equal assert_equal '<iframe id="ytplayer" type="text/html" width="320" height="265" src="http://www.youtube.com/embed/E4Fbk52Mk1w" frameborder="0"/>', '[youtube]http://youtube.com/watch?v=E4Fbk52Mk1w[/youtube]'.bbcode_to_html
+    assert_equal '<iframe id="ytplayer" type="text/html" width="640" height="390" src="http://www.youtube.com/embed/E4Fbk52Mk1w" frameborder="0"/>', '[youtube]http://youtube.com/watch?v=E4Fbk52Mk1w[/youtube]'.bbcode_to_html
+    assert_equal '<iframe id="ytplayer" type="text/html" width="640" height="390" src="http://www.youtube.com/embed/E4Fbk52Mk1w" frameborder="0"/><iframe id="ytplayer" type="text/html" width="640" height="390" src="http://www.youtube.com/embed/abc123" frameborder="0"/>', '[youtube]http://youtube.com/watch?v=E4Fbk52Mk1w[/youtube][youtube]http://youtube.com/watch?v=abc123[/youtube]'.bbcode_to_html
   end
 
   def test_vimeo
-    assert_equal '<object type="application/x-shockwave-flash" width="500" height="350" data="http://www.vimeo.com/moogaloop.swf?clip_id=3485239"><param name="quality" value="best" /><param name="allowfullscreen" value="true" /><param name="scale" value="showAll" /><param name="movie" value="http://www.vimeo.com/moogaloop.swf?clip_id=3485239" /></object>', '[vimeo]http://www.vimeo.com/3485239[/vimeo]'.bbcode_to_html
+    assert_equal '<iframe src="//player.vimeo.com/video/3485239" width="640" height="390" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>', '[vimeo]http://www.vimeo.com/3485239[/vimeo]'.bbcode_to_html
   end
 
   def test_google_video
