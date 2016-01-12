@@ -9,3 +9,5 @@ script
 .DS_Store
 *.gem
 vendor/
+Gemfile.lock
+.ruby-version
