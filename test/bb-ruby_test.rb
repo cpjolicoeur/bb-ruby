@@ -349,4 +349,7 @@ class TestBBRuby < Test::Unit::TestCase
     assert_equal 'One<br />Two<br />Three lines!', 'One[br]Two[br]Three lines!'.bbcode_to_html
   end
 
+  def test_center_with_url
+    assert_equal '<div style="text-align: center;">hello <a href="http://www.test.com">www.test.com</a></div>', '[center]hello www.test.com[/center]'.bbcode_to_html
+  end
 end
