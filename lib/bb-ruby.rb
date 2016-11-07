@@ -40,7 +40,7 @@ module BBRuby
       /\[ins(:.+)?\](.*?)\[\/ins\1?\]/mi,
       '<ins>\2</ins>',
       'Inserted Text',
-      '[ins]inserted text[/del]',
+      '[ins]inserted text[/ins]',
       :insert],
     'Code' => [
       /\[code(:.+)?\](.*?)\[\/code\1?\]/mi,
@@ -76,7 +76,7 @@ module BBRuby
       /\[li\](.*?)\[\/li\]/mi,
       '<li>\1</li>',
       'List item',
-      'See ol or ul',
+      '[li]list item[/li]',
       :listitem],
     'List Item (alternative)' => [
       /\[\*(:[^\[]+)?\]([^(\[|\<)]+)/mi,
@@ -118,7 +118,7 @@ module BBRuby
       /\[dd\](.*?)\[\/dd\]/mi,
       '<dd>\1</dd>',
       'Definition definitions',
-      '[dd]my definition[/dd',
+      '[dd]my definition[/dd]',
       :definition],
     'Quote' => [
       /\[quote(:.*)?=(?:&quot;)?(.*?)(?:&quot;)?\](.*?)\[\/quote\1?\]/mi,
@@ -315,6 +315,11 @@ module BBRuby
       @@tags
     end
 
+    # Checks if text contains any bb tag
+    def any_bb_tags?(text)
+      tag_list.map{|k,v| v[0]}.any?{|regex| text.match(regex) }
+    end
+
     private
 
     def process_tags(text, tags_alternative_definition={}, escape_html=true, method=:disable, *tags)
@@ -372,7 +377,6 @@ module BBRuby
   end # class << self
 
 end
-
 
 class String
   # Convert a string with BBCode markup into its corresponding HTML markup
@@ -434,5 +438,9 @@ class String
   # Replace the string contents with the HTML-converted markup using simple_format
   def bbcode_to_html_with_formatting!(tags_alternative_definition = {}, escape_html=true, method=:disable, *tags)
     self.replace(BBRuby.to_html_with_formatting(self, tags_alternative_definition, escape_html, method, *tags))
+  end
+
+  def bbcode_formatted?
+    BBRuby.any_bb_tags?(self)
   end
 end
