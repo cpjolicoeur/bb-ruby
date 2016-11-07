@@ -1,7 +1,7 @@
 #! /usr/bin/env ruby
 #coding: utf-8
 
-require 'test_helper.rb'
+require_relative 'test_helper.rb'
 
 class TestBBRuby < Test::Unit::TestCase
 
@@ -351,5 +351,13 @@ class TestBBRuby < Test::Unit::TestCase
 
   def test_center_with_url
     assert_equal '<div style="text-align: center;">hello <a href="http://www.test.com">www.test.com</a></div>', '[center]hello www.test.com[/center]'.bbcode_to_html
+  end
+
+  def test_any_tag_inclusion_from_examples
+    examples = BBRuby.tag_list.map{|k,v| v[3]}
+    examples.each do |example|
+      assert_equal true, example.bbcode_formatted?
+    end
+    assert_equal false, "There is no bb tags in this sentence!".bbcode_formatted?
   end
 end
