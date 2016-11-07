@@ -1,3 +1,8 @@
+== 1.3.0 2016-11-07
+
+* Added #any_bb_tags? and .bbcode_formatted? methods
+* Fixed typos in tag examples
+
 == 1.2.2 2016-06-17
 
 * Fix <iframe> to not be self-closing tag
