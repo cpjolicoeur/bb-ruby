@@ -40,7 +40,7 @@ module BBRuby
       /\[ins(:.+)?\](.*?)\[\/ins\1?\]/mi,
       '<ins>\2</ins>',
       'Inserted Text',
-      '[ins]inserted text[/del]',
+      '[ins]inserted text[/ins]',
       :insert],
     'Code' => [
       /\[code(:.+)?\](.*?)\[\/code\1?\]/mi,
@@ -76,7 +76,7 @@ module BBRuby
       /\[li\](.*?)\[\/li\]/mi,
       '<li>\1</li>',
       'List item',
-      'See ol or ul',
+      '[li]list item[/li]',
       :listitem],
     'List Item (alternative)' => [
       /\[\*(:[^\[]+)?\]([^(\[|\<)]+)/mi,
@@ -118,7 +118,7 @@ module BBRuby
       /\[dd\](.*?)\[\/dd\]/mi,
       '<dd>\1</dd>',
       'Definition definitions',
-      '[dd]my definition[/dd',
+      '[dd]my definition[/dd]',
       :definition],
     'Quote' => [
       /\[quote(:.*)?=(?:&quot;)?(.*?)(?:&quot;)?\](.*?)\[\/quote\1?\]/mi,
