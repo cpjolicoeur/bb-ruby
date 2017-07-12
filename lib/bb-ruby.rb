@@ -183,14 +183,14 @@ module BBRuby
     'YouTube' => [
       /\[youtube\](.*?)\?v=([\w\d\-]+).*?\[\/youtube\]/im,
       # '<object width="400" height="330"><param name="movie" value="http://www.youtube.com/v/\2"></param><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/\2" type="application/x-shockwave-flash" wmode="transparent" width="400" height="330"></embed></object>',
-      '<iframe id="ytplayer" type="text/html" width="640" height="390" src="http://www.youtube.com/embed/\2" frameborder="0"></iframe>',
+      '<iframe id="ytplayer" type="text/html" width="640" height="390" src="//youtube.com/embed/\2" frameborder="0"></iframe>',
       'Display a video from YouTube.com',
       '[youtube]http://youtube.com/watch?v=E4Fbk52Mk1w[/youtube]',
       :video],
     'YouTube (Alternative)' => [
       /\[youtube\](.*?)\/v\/([\w\d\-]+)\[\/youtube\]/im,
       # '<object width="400" height="330"><param name="movie" value="http://www.youtube.com/v/\2"></param><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/\2" type="application/x-shockwave-flash" wmode="transparent" width="400" height="330"></embed></object>',
-      '<iframe id="ytplayer" type="text/html" width="640" height="390" src="http://www.youtube.com/embed/\2" frameborder="0"></iframe>',
+      '<iframe id="ytplayer" type="text/html" width="640" height="390" src="//youtube.com/embed/\2" frameborder="0"></iframe>',
       'Display a video from YouTube.com (alternative format)',
       '[youtube]http://youtube.com/watch/v/E4Fbk52Mk1w[/youtube]',
       :video],

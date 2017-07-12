@@ -143,8 +143,8 @@ class TestBBRuby < Test::Unit::TestCase
   def test_youtube
     # Uncomment below if using 4:3 format youtube video embed
     # assert_equal assert_equal '<iframe id="ytplayer" type="text/html" width="320" height="265" src="http://www.youtube.com/embed/E4Fbk52Mk1w" frameborder="0"/>', '[youtube]http://youtube.com/watch?v=E4Fbk52Mk1w[/youtube]'.bbcode_to_html
-    assert_equal '<iframe id="ytplayer" type="text/html" width="640" height="390" src="http://www.youtube.com/embed/E4Fbk52Mk1w" frameborder="0"></iframe>', '[youtube]http://youtube.com/watch?v=E4Fbk52Mk1w[/youtube]'.bbcode_to_html
-    assert_equal '<iframe id="ytplayer" type="text/html" width="640" height="390" src="http://www.youtube.com/embed/E4Fbk52Mk1w" frameborder="0"></iframe><iframe id="ytplayer" type="text/html" width="640" height="390" src="http://www.youtube.com/embed/abc123" frameborder="0"></iframe>', '[youtube]http://youtube.com/watch?v=E4Fbk52Mk1w[/youtube][youtube]http://youtube.com/watch?v=abc123[/youtube]'.bbcode_to_html
+    assert_equal '<iframe id="ytplayer" type="text/html" width="640" height="390" src="//youtube.com/embed/E4Fbk52Mk1w" frameborder="0"></iframe>', '[youtube]http://youtube.com/watch?v=E4Fbk52Mk1w[/youtube]'.bbcode_to_html
+    assert_equal '<iframe id="ytplayer" type="text/html" width="640" height="390" src="//youtube.com/embed/E4Fbk52Mk1w" frameborder="0"></iframe><iframe id="ytplayer" type="text/html" width="640" height="390" src="//youtube.com/embed/abc123" frameborder="0"></iframe>', '[youtube]http://youtube.com/watch?v=E4Fbk52Mk1w[/youtube][youtube]http://youtube.com/watch?v=abc123[/youtube]'.bbcode_to_html
   end
 
   def test_vimeo
